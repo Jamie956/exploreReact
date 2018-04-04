@@ -1,13 +1,52 @@
 import React from "react";
 import { render } from "react-dom";
-import _ from "lodash";
-import { makeData, Logo, Tips } from "./Utils";
-
-// Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import _ from "lodash";
 
-const rawData = makeData();
+const rawData = [{
+  name: 'Diko',
+  age: 12,
+  friend: {
+    name: 'Juju',
+    age: 18,
+  }
+}, {
+  name: 'Juju',
+  age: 18,
+  friend: {
+    name: 'Pina',
+    age: 25,
+  }
+}, {
+  name: 'Tomcat',
+  age: 19,
+  friend: {
+    name: 'Dog',
+    age: 25,
+  }
+}, {
+  name: 'Nash',
+  age: 26,
+  friend: {
+    name: 'Juju',
+    age: 5,
+  }
+}, {
+  name: 'Pufa',
+  age: 31,
+  friend: {
+    name: 'Pina',
+    age: 27,
+  }
+}, {
+  name: 'Koni',
+  age: 36,
+  friend: {
+    name: 'Tnu',
+    age: 22,
+  }
+}]
 
 const requestData = (pageSize, page, sorted, filtered) => {
   return new Promise((resolve, reject) => {
@@ -78,38 +117,58 @@ class App extends React.Component {
       });
     });
   }
+
   render() {
     const { data, pages, loading } = this.state;
+
+    const columns = [
+      {
+        Header: "Info",
+        columns: [
+          {
+            Header: 'Name',
+            accessor: 'name' // String-based value accessors!
+          }, {
+            Header: 'Age',
+            accessor: 'age',
+            Cell: props => <span className='number'>{props.value}</span> // Custom cell components!
+          },
+        ]
+      },
+      {
+        Header: 'Friend',
+        columns: [
+          {
+            id: 'friendName', // Required because our accessor is not a string
+            Header: 'Friend Name',
+            accessor: d => d.friend.name // Custom value accessors!
+          }, {
+            Header: props => <span>Friend Age</span>, // Custom header components!
+            accessor: 'friend.age'
+          }
+        ]
+      }
+    ]
+
+    const divStyle = {
+      color: 'blue',
+      height: 42,
+    }
+
     return (
-      <div>
+      <div style={divStyle} className="container">
         <ReactTable
-          columns={[
-            {
-              Header: "First Name",
-              accessor: "firstName"
-            },
-            {
-              Header: "Last Name",
-              id: "lastName",
-              accessor: d => d.lastName
-            },
-            {
-              Header: "Age",
-              accessor: "age"
-            }
-          ]}
-          manual // Forces table not to paginate or sort automatically, so we can handle it server-side
           data={data}
+          columns={columns}
+          defaultPageSize={5}
+          className="-striped -highlight"
+
+          manual // Forces table not to paginate or sort automatically, so we can handle it server-side
           pages={pages} // Display the total number of pages
           loading={loading} // Display the loading overlay when we need it
           onFetchData={this.fetchData} // Request new data when things change
           filterable
-          defaultPageSize={10}
-          className="-striped -highlight"
         />
-        <br />
-        <Tips />
-        <Logo />
       </div>
     );
   }
