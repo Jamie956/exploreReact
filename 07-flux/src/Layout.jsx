@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Dispatcher } from "flux";
 
 /**
@@ -32,28 +32,43 @@ dispatcher.register(store.handleActions.bind(store));
  */
 class Action {
   create(text) {
-    dispatcher.dispatch({ type: "CREATE", text });
+    dispatcher.dispatch({
+      type: "CREATE",
+      text
+    });
   }
   update(text) {
-    dispatcher.dispatch({ type: "UPDATE", text });
+    dispatcher.dispatch({
+      type: "UPDATE",
+      text
+    });
   }
-} 
+}
 const action = new Action;
 
 /**
  * Layout
  */
-export default class Layout extends React.Component {
+export default class Layout extends Component {
+  constructor(){
+    super()
+    this.handleCreate = this.handleCreate.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
+  }
+
   handleCreate(){
     action.create(Date.now());
-	};
+  }
+  
   handleUpdate(){
     action.update(Date.now());
-	};
+  }
+  
 	render() {
 		return (
 			<div>
-				<button onClick={this.handleCreate.bind(this)}>Create</button> | <button onClick={this.handleUpdate.bind(this)}>Update</button>
+        <p><button onClick={this.handleCreate}>Create</button></p>
+        <p><button onClick={this.handleUpdate}>Update</button></p>
 			</div>
 		);
 	}
