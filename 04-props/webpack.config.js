@@ -8,14 +8,18 @@ module.exports = {
     filename: "bundle.js"
   },
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /(node_modules)/,
-      loader: 'babel-loader',
-      query: {
-        presets: ['react', 'es2015', 'stage-0']
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'react', 'stage-0']
+          }
+        }
       }
-    }]
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
