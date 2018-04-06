@@ -1,6 +1,9 @@
 import { createStore } from "redux";
 
 function counter(state = 0, action) {
+  if (typeof state === 'undefined') {
+    return 0
+  }
   switch (action.type) {
     case 'INCREMENT':
       return state + 1
