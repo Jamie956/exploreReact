@@ -31,10 +31,6 @@ function setVisibilityFilter(filter) {
   return { type: SET_VISIBILITY_FILTER, filter }
 }
 
-/**
- * You see
- */
-
 addTodo('It is addTodo')
 toggleTodo('It is toggleTodo')
 setVisibilityFilter('It is setVisibilityFilter')
