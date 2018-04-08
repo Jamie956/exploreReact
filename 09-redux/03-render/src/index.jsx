@@ -30,7 +30,24 @@ Counter.propTypes = {
 }
 
 /**
- * action
+ * action types
+ */
+const INCREMENT = 'INCREMENT'
+const DECREMENT = 'DECREMENT'
+
+/**
+ * action creators
+ */
+const toIncrement = () => {
+  return { type: INCREMENT }
+}
+
+const toDecrement = () => {
+  return { type: DECREMENT }
+}
+
+/**
+ * reducers
  */
 const counter = (state = 0, action) => {
   switch (action.type) {
@@ -42,6 +59,10 @@ const counter = (state = 0, action) => {
       return state
   }
 }
+
+/**
+ * store
+ */
 const store = createStore(counter)
 
 /**
@@ -50,8 +71,8 @@ const store = createStore(counter)
 const render = () => ReactDOM.render(
   <Counter
     value={store.getState()}
-    onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-    onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
+    onIncrement={() => store.dispatch(toIncrement())}
+    onDecrement={() => store.dispatch(toDecrement())}
   />,
   document.getElementById('root')
 )
