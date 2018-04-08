@@ -27,12 +27,45 @@ class App extends React.Component {
         onBlur={e => {
           const data = [...this.state.data];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          console.log(data)
-
           this.setState({ data });
+          // console.log(data[cellInfo.index])
+
+          this.handleSubmit(data[cellInfo.index])
+        }}
+        dangerouslySetInnerHTML={{
+          __html: this.state.data[cellInfo.index][cellInfo.column.id]
         }}
       />
     );
+  }
+
+  handleSubmit(row) {
+    console.log('call handleSubmit')
+
+    var submitObj = {
+      'name': row.name,
+      'age': row.age
+    }
+    var postBody = JSON.stringify(submitObj);
+    console.log(postBody)
+    fetch("/api/edit",
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: postBody
+      }
+    )
+    .then((res) => {
+      if (res.status > 200) {
+        return res.json().then(data => {
+
+        });
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
   }
 
   render() {
