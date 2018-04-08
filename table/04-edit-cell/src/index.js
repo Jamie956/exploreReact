@@ -9,18 +9,10 @@ class App extends React.Component {
     this.state = {
       data: [{
         name: 'Diko',
-        age: 12,
-        friend: {
-          name: 'Juju',
-          age: 18,
-        }
+        age: 12
       }, {
         name: 'Juju',
-        age: 18,
-        friend: {
-          name: 'Pina',
-          age: 25,
-        }
+        age: 18
       }]
     }
     this.renderEditable = this.renderEditable.bind(this);
@@ -46,40 +38,21 @@ class App extends React.Component {
   render() {
     const { data } = this.state;
 
-
     const columns = [
       {
-        Header: "Info",
-        columns: [
-          {
-            Header: 'Name',
-            accessor: 'name',
-            Cell: this.renderEditable
-          }, {
-            Header: 'Age',
-            accessor: 'age',
-            Cell: this.renderEditable
-          },
-        ]
-      },
-      {
-        Header: 'Friend',
-        columns: [
-          {
-            id: 'friendName',
-            Header: 'Friend Name',
-            accessor: d => d.friend.name
-          }, {
-            Header: props => <span>Friend Age</span>,
-            accessor: 'friend.age'
-          }
-        ]
+        Header: 'Name',
+        accessor: 'name',
+        Cell: this.renderEditable
+      }, {
+        Header: 'Age',
+        accessor: 'age',
+        Cell: this.renderEditable
       }
     ]
 
     const divStyle = {
       color: 'blue',
-      height: 42,
+      height: 42
     }
 
     return (
