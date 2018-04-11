@@ -1,44 +1,42 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-class Header extends Component {
-    constructor(){
-        super();
-        this.handleChange = this.handleChange.bind(this);
-    }
+const Body = (props) => {
+    const { title, name, handleChange } = props
 
-    handleChange(e) {
-        const title = e.target.value;
-        this.props.changeTitle(title);
-    }
-
-    render() {
-        const { title } = this.props
-        return (
-            <div>
-                <h1>{title}</h1>
-                <input value={title} onChange={this.handleChange} />
-            </div>
-        );
-    }
+    return (
+        <div>
+            <input name="title" value={title} onChange={(e) => {handleChange(e)}} />
+            <br/>
+            <input name="name" value={name} onChange={(e) => {handleChange(e)}} />
+            
+        </div>
+    );
 }
 
 class Layout extends Component {
     constructor() {
         super();
-        this.state = { title: "Here We Go!" }
-        this.changeTitle = this.changeTitle.bind(this);        
+        this.state = {
+            title: "Here We Go!",
+            name: "tomcat"
+        }
+        this.handleChange = this.handleChange.bind(this);        
     }
 
-    changeTitle(title) {
-        this.setState({ title });
+    handleChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     render() {
-        const { title } = this.state
+        const { title, name } = this.state
         return (
             <div>
-                <Header changeTitle={this.changeTitle} title={title} />
+                <Body 
+                    handleChange={this.handleChange} 
+                    title={title}
+                    name={name}
+                 />
             </div>
         );
     }

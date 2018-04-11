@@ -9,8 +9,7 @@ class Greeting extends Component {
             password: '4521'
         };
     };
-    updatePwd = () => {
-        console.log('ssss')
+    handleClick = () => {
         this.setState({password:'123'})
     }
 	render(){
@@ -19,7 +18,7 @@ class Greeting extends Component {
 			<div>
                 <h1>{name}</h1>
                 <h1>{password}</h1>
-                <button onClick={this.updatePwd}>Click me!</button>
+                <button onClick={this.handleClick}>Click me!</button>
 			</div>
 		);
 	}
