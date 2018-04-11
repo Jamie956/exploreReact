@@ -82,6 +82,11 @@ class Example extends React.Component {
 							<div className="modal-body">
 								<div id="nod">hello</div>
 							</div>
+
+							<div className="modal-footer" >
+								<button type="submit" className="btn btn-primary" >Submit</button>
+							</div>
+
 						</div>
 					</div>
 				</div>
