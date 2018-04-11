@@ -2,74 +2,57 @@ import React, { Component } from "react";
 import { Dispatcher } from "flux";
 
 /**
+ * action types
+ */
+const CREATE = 'CREATE'
+const UPDATE = 'UPDATE'
+
+/*
+ * action creators
+ */
+const createAction = (text) => {
+  return { type: CREATE, text }
+}
+const updateAction = (text) => {
+  return { type: UPDATE, text }
+}
+
+/**
  * Dispatcher
  */
 const dispatcher = new Dispatcher;
 
-/**
- * Store
- */
-class Store {
-  handleActions(action) {
-    console.log(action);
-    switch(action.type) {
-      case "CREATE": {
-        console.log('CREATE.');
-        break;
-      }
-      case "UPDATE": {
-        console.log('UPDATE.');
-        break;
-      }
+
+const handleActions = (action) => {
+  console.log(action);
+  switch (action.type) {
+    case CREATE: {
+      console.log('CREATE.');
+      break;
+    }
+    case UPDATE: {
+      console.log('UPDATE.');
+      break;
     }
   }
 }
-const store = new Store;
-dispatcher.register(store.handleActions.bind(store));
+dispatcher.register(handleActions.bind(handleActions));
 
-/**
- * Action
- */
-class Action {
-  create(text) {
-    dispatcher.dispatch({
-      type: "CREATE",
-      text
-    });
-  }
-  update(text) {
-    dispatcher.dispatch({
-      type: "UPDATE",
-      text
-    });
-  }
+
+const create = (text) => {
+  dispatcher.dispatch(createAction(text));
 }
-const action = new Action;
+const update = (text) => {
+  dispatcher.dispatch(updateAction(text));
+}
 
-/**
- * Layout
- */
 export default class Layout extends Component {
-  constructor(){
-    super()
-    this.handleCreate = this.handleCreate.bind(this)
-    this.handleUpdate = this.handleUpdate.bind(this)
+  render() {
+    return (
+      <div>
+        <p><button onClick={() => {create(Date.now())} }>create</button></p>
+        <p><button onClick={() => {update(Date.now())} }>update</button></p>
+      </div>
+    );
   }
-
-  handleCreate(){
-    action.create(Date.now());
-  }
-  
-  handleUpdate(){
-    action.update(Date.now());
-  }
-  
-	render() {
-		return (
-			<div>
-        <p><button onClick={this.handleCreate}>Create</button></p>
-        <p><button onClick={this.handleUpdate}>Update</button></p>
-			</div>
-		);
-	}
 }
