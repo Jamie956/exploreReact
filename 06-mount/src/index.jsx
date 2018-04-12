@@ -1,42 +1,42 @@
 import React, { Component } from "react";
 import ReactDOM, { render } from "react-dom";
 
-// class Layout extends Component {
-// 	constructor() {
-// 		super();
-// 		console.log('Call constructor');
-// 	}
+class Layout extends Component {
+	constructor() {
+		super();
+		console.log('Call constructor');
+	}
 
-// 	componentWillMount() {
-// 		console.log('Call componentWillMount');
-// 	}
+	componentWillMount() {
+		console.log('Call componentWillMount');
+	}
 
-// 	componentDidMount() {
-// 		console.log('Call componentDidMount');
-// 	}
+	componentDidMount() {
+		console.log('Call componentDidMount');
+	}
 
-// 	componentWillUnmount() {
-// 		console.log('Call componentWillUnmount');
-// 	}
+	componentWillUnmount() {
+		console.log('Call componentWillUnmount');
+	}
 
-// 	render() {
-// 		return (
-// 			<h1>Press F12, the console, U see.</h1>
-// 		);
-// 	}
-// }
+	render() {
+		return (
+			<h1>Press F12, the console, U see.</h1>
+		);
+	}
+}
 
-// setTimeout(() => {
-// 	console.log('ready to remove component');
-// 	ReactDOM.unmountComponentAtNode(document.getElementById('root'));
-// }, 3000);
+setTimeout(() => {
+	console.log('ready to remove component');
+	ReactDOM.unmountComponentAtNode(document.getElementById('root'));
+}, 3000);
 
-// setTimeout(() => {
-// 	console.log('ready to render component');
-// 	render(<Layout />, document.getElementById('root'));
-// }, 6000);
+setTimeout(() => {
+	console.log('ready to render component');
+	render(<Layout />, document.getElementById('root'));
+}, 6000);
 
-// render(<Layout />, document.getElementById('root'));
+render(<Layout />, document.getElementById('root'));
 
 //=======================
 
@@ -72,21 +72,21 @@ import ReactDOM, { render } from "react-dom";
 
 //========================
 
-class CounterButton extends React.PureComponent {
-	constructor(props) {
-		super(props);
-		this.state = { count: 1 };
-	}
+// class CounterButton extends React.PureComponent {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = { count: 1 };
+// 	}
 
-	render() {
-		return (
-			<button
-				color={this.props.color}
-				onClick={() => this.setState(state => ({ count: state.count + 1 }))}>
-				Count: {this.state.count}
-			</button>
-		);
-	}
-}
+// 	render() {
+// 		return (
+// 			<button
+// 				color={this.props.color}
+// 				onClick={() => this.setState(state => ({ count: state.count + 1 }))}>
+// 				Count: {this.state.count}
+// 			</button>
+// 		);
+// 	}
+// }
 
-render(<CounterButton />, document.getElementById('root'));
+// render(<CounterButton />, document.getElementById('root'));

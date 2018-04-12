@@ -2,65 +2,53 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import { EventEmitter } from "events";
 
-class Row extends Component {
-	render() {
-		const { complete, text } = this.props;
-		const icon = complete ? "\u2714" : "\u2716"
-		return (
-			<li>
-				<span>{text}</span> <span>{icon}</span>
-			</li>
-		);
-	}
+const Row = (props) => {
+	return (
+		<li>
+			<span>{props.text}</span>
+		</li>
+	)
 }
 
-/**
- * store
- */
 class Store extends EventEmitter {
-	constructor(){
+	constructor() {
 		super()
 		this.tasks = [
 			{
-				id: 9456,
-				text: "Home Work",
-				complete: false
+				id: 1,
+				text: "Home Work"
 			},
 			{
-				id: 1256,
-				text: "Play Game",
-				complete: true
+				id: 2,
+				text: "Game"
 			}
 		];
 	};
-	
+
 	createTask(text) {
 		const id = Date.now();
 		this.tasks.push({
 			id,
-			text,
-			complete: false,
+			text
 		});
 		this.emit("change");
 	};
 
-	getTasks(){
+	getTasks() {
 		return this.tasks;
 	};
 }
 const store = new Store;
 
-/**
- * main
- */
 class Main extends Component {
 	constructor() {
 		super();
 		this.state = {
 			tasks: store.getTasks(),
+			newTask: ''
 		};
 	}
-	
+
 	componentWillMount() {
 		store.on("change", () => {
 			this.setState({
@@ -69,23 +57,20 @@ class Main extends Component {
 		});
 	};
 
-	create(){
-		store.createTask(Date.now());
-	}
-
 	render() {
-		const { tasks } = this.state;
+		const { tasks, newTask } = this.state;
 		const Rows = tasks.map((task) => {
-			return <Row key={task.id} {...task}/>;
+			return <Row key={task.id} {...task} />;
 		});
-		
+
 		return (
 			<div>
-				<button onClick={this.create.bind(this)}>Create</button>
+				<input type="text" value={newTask} onChange={(e) => { this.setState({ newTask: e.target.value }) }} />
+				<button onClick={() => { store.createTask(newTask) }}>Create</button>
 				{Rows}
 			</div>
 		);
 	}
 }
 
-render(<Main /> , document.getElementById('root'));
+render(<Main />, document.getElementById('root'));

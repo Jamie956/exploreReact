@@ -5,20 +5,16 @@ class Greeting extends Component {
 	constructor(){
 		super();
 		this.state = {
-            name: 'Moks',
-            password: '4521'
+            name: 'Moks'
         };
+
     };
-    handleClick = () => {
-        this.setState({password:'123'})
-    }
 	render(){
-        const { name, password } = this.state
+        const { name } = this.state
 		return (
 			<div>
                 <h1>{name}</h1>
-                <h1>{password}</h1>
-                <button onClick={this.handleClick}>Click me!</button>
+                <button onClick={ () => { this.setState({name:'Miki'}) } }>Click me!</button>
 			</div>
 		);
 	}
