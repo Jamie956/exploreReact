@@ -9,6 +9,11 @@ import rootReducer from './reducers'
 
 const store = createStore(rootReducer)
 
+store.subscribe(() => {
+  console.log('call subscribe')
+	console.log(store.getState());
+})
+
 render(
   <Provider store={store}>
     <App />
