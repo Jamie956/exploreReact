@@ -25,7 +25,7 @@ class Store extends EventEmitter {
 		];
 	};
 
-	createTask(text) {
+	addTask(text) {
 		const id = Date.now();
 		this.tasks.push({
 			id,
@@ -34,7 +34,7 @@ class Store extends EventEmitter {
 		this.emit("change");
 	};
 
-	getTasks() {
+	listTasks() {
 		return this.tasks;
 	};
 }
@@ -44,30 +44,37 @@ class Main extends Component {
 	constructor() {
 		super();
 		this.state = {
-			tasks: store.getTasks(),
-			newTask: ''
+			tasks: store.listTasks(),
+			task: ''
 		};
+		this.handleClick = this.handleClick.bind(this)
 	}
 
 	componentWillMount() {
 		store.on("change", () => {
 			this.setState({
-				tasks: store.getTasks(),
+				tasks: store.listTasks(),
 			});
 		});
 	};
 
-	render() {
-		const { tasks, newTask } = this.state;
-		const Rows = tasks.map((task) => {
-			return <Row key={task.id} {...task} />;
+	handleClick() {
+		store.addTask(this.state.task)
+		this.setState({
+			task: ''
 		});
-
+	}
+	
+	render() {
+		const { task, tasks } = this.state;
 		return (
 			<div>
-				<input type="text" value={newTask} onChange={(e) => { this.setState({ newTask: e.target.value }) }} />
-				<button onClick={() => { store.createTask(newTask) }}>Create</button>
-				{Rows}
+				<input type="text" name="task" value={task} onChange={(e) => { this.setState({ [e.target.name]: e.target.value }) }} />
+				<button onClick={this.handleClick}>add</button>
+				{tasks.map(task =>
+					<Row key={task.id} {...task} />
+				)}
+
 			</div>
 		);
 	}
