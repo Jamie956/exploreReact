@@ -43,6 +43,9 @@ store.subscribe(() =>
   console.log(store.getState())
 )
 
+/**
+ * action
+ */
 store.dispatch(toIncrement())
 store.dispatch(toIncrement())
 store.dispatch(toDecrement())
