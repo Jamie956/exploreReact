@@ -4,16 +4,16 @@ import { Dispatcher } from "flux";
 /**
  * action types
  */
-const CREATE = 'CREATE'
+const ADD = 'ADD'
 const UPDATE = 'UPDATE'
 
 /*
  * action creators
  */
-const createAction = (text) => {
-  return { type: CREATE, text }
+const addActionCreator = (text) => {
+  return { type: ADD, text }
 }
-const updateAction = (text) => {
+const updateActionCreator = (text) => {
   return { type: UPDATE, text }
 }
 
@@ -22,36 +22,39 @@ const updateAction = (text) => {
  */
 const dispatcher = new Dispatcher;
 
-
+/**
+ * reducer
+ */
 const handleActions = (action) => {
-  console.log(action);
   switch (action.type) {
-    case CREATE: {
-      console.log('CREATE.');
+    case ADD: {
+      console.log('ADD');
       break;
     }
     case UPDATE: {
-      console.log('UPDATE.');
+      console.log('UPDATE');
       break;
     }
   }
 }
 dispatcher.register(handleActions.bind(handleActions));
 
-
-const create = (text) => {
-  dispatcher.dispatch(createAction(text));
+/**
+ * action
+ */
+const addAction = (text) => {
+  dispatcher.dispatch(addActionCreator(text));
 }
-const update = (text) => {
-  dispatcher.dispatch(updateAction(text));
+const updateAction = (text) => {
+  dispatcher.dispatch(updateActionCreator(text));
 }
 
 export default class Layout extends Component {
   render() {
     return (
       <div>
-        <p><button onClick={() => {create(Date.now())} }>create</button></p>
-        <p><button onClick={() => {update(Date.now())} }>update</button></p>
+        <p><button onClick={() => {addAction(Date.now())} }>add</button></p>
+        <p><button onClick={() => {updateAction(Date.now())} }>update</button></p>
       </div>
     );
   }
