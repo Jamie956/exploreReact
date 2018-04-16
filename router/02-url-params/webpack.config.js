@@ -2,7 +2,11 @@ var path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: "./src/main.js",
+  entry: "./src/index.jsx",
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: "bundle.js"
+  },
   module: {
     rules: [
       {
@@ -11,7 +15,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['react', 'es2015']
+            presets: ['react', 'es2015', 'stage-0']
           }
         }
       }
@@ -23,8 +27,4 @@ module.exports = {
       filename: 'index.html'
     })
   ],
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: "bundle.js"
-  }
 };
