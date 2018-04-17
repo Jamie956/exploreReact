@@ -1,57 +1,36 @@
 import React, { Component } from 'react'
 import ReactDOM from "react-dom"
 
-// function UserGreeting(props) {
-// 	return <h1>Welcome back!</h1>;
-// }
-// function GuestGreeting(props) {
-// 	return <h1>Please sign up.</h1>;
-// }
-// function Greeting(props) {
-// 	const isLoggedIn = props.isLoggedIn;
-// 	if (isLoggedIn) {
-// 		return <UserGreeting />;
-// 	}
-// 	return <GuestGreeting />;
-// }
-// ReactDOM.render(
-// 	<Greeting isLoggedIn={true} />,
-// 	document.getElementById('root')
-// );
+const UserGreeting = (props) => <h1>Welcome back!</h1>
+const GuestGreeting = (props) => <h1>Please sign up.</h1>
+
+const Greeting = (props) => {
+	return (
+		<div>
+			{(props.isLoggedIn) ? (<UserGreeting />) : (<GuestGreeting />)}
+		</div>
+	)
+}
+
+ReactDOM.render(<Greeting isLoggedIn={true} />, document.getElementById('root'));
 
 //===========================================
 
-// function UserGreeting(props) {
-// 	return <h1>Welcome back!</h1>;
-// }
+// const UserGreeting = (props) => <h1>Welcome back!</h1>
 
-// function GuestGreeting(props) {
-// 	return <h1>Please sign up.</h1>;
-// }
+// const GuestGreeting = (props) => <h1>Please sign up.</h1>
 
-// function Greeting(props) {
-// 	const isLoggedIn = props.isLoggedIn;
-// 	if (isLoggedIn) {
-// 		return <UserGreeting />;
-// 	}
-// 	return <GuestGreeting />;
-// }
-
-// function LoginButton(props) {
+// const Greeting = (props) => {
 // 	return (
-// 		<button onClick={props.onClick}>
-// 			Login
-//     </button>
-// 	);
+// 		<div>
+// 			{(props.isLoggedIn) ? (<UserGreeting />) : (<GuestGreeting />)}
+// 		</div>
+// 	)
 // }
 
-// function LogoutButton(props) {
-// 	return (
-// 		<button onClick={props.onClick}>
-// 			Logout
-//     </button>
-// 	);
-// }
+// const LoginButton = (props) => <button onClick={props.onClick}>Login</button>
+
+// const LogoutButton = (props) => <button onClick={props.onClick}>Logout</button>
 
 // class LoginControl extends React.Component {
 // 	constructor(props) {
@@ -72,11 +51,8 @@ import ReactDOM from "react-dom"
 // 	render() {
 // 		const isLoggedIn = this.state.isLoggedIn;
 
-// 		const button = isLoggedIn ? (
-// 			<LogoutButton onClick={this.handleLogoutClick} />
-// 		) : (
-// 				<LoginButton onClick={this.handleLoginClick} />
-// 			);
+// 		const button = isLoggedIn ?
+// 			(<LogoutButton onClick={this.handleLogoutClick} />) : (<LoginButton onClick={this.handleLoginClick} />);
 
 // 		return (
 // 			<div>
@@ -87,15 +63,9 @@ import ReactDOM from "react-dom"
 // 	}
 // }
 
-// ReactDOM.render(
-// 	<LoginControl />,
-// 	document.getElementById('root')
-// );
-
+// ReactDOM.render(<LoginControl />, document.getElementById('root'));
 
 //===========================================
-
-
 
 // function Mailbox(props) {
 //   const unreadMessages = props.unreadMessages;
@@ -103,61 +73,52 @@ import ReactDOM from "react-dom"
 //     <div>
 //       <h1>Hello!</h1>
 //       {unreadMessages.length > 0 &&
-//         <h2>
-//           You have {unreadMessages.length} unread messages.
-//         </h2>
+//         <h2>You have {unreadMessages.length} unread messages.</h2>
 //       }
 //     </div>
 //   );
 // }
 
 // const messages = ['React', 'Re: React', 'Re:Re: React'];
-// ReactDOM.render(
-//   <Mailbox unreadMessages={messages} />,
-//   document.getElementById('root')
-// );
+// ReactDOM.render(<Mailbox unreadMessages={messages} />, document.getElementById('root'));
 
 //===========================================
 
-function WarningBanner(props) {
-	if (!props.warn) {
-		return null;
-	}
+// const WarningBanner = (props) => {
+// 	if (!props.warn) {
+// 		return null;
+// 	}
 
-	return (
-		<div className="warning">
-			Warning!
-    </div>
-	);
-}
+// 	return (
+// 		<div className="warning">
+// 			Warning!
+// 		</div>
+// 	);
+// }
 
-class Page extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { showWarning: true };
-		this.handleToggleClick = this.handleToggleClick.bind(this);
-	}
+// class Page extends React.Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = { showWarning: true };
+// 		this.handleToggleClick = this.handleToggleClick.bind(this);
+// 	}
 
-	handleToggleClick() {
-		this.setState(prevState => ({
-			showWarning: !prevState.showWarning
-		}));
-	}
+// 	handleToggleClick() {
+// 		this.setState(prevState => ({
+// 			showWarning: !prevState.showWarning
+// 		}));
+// 	}
 
-	render() {
-		return (
-			<div>
-				<WarningBanner warn={this.state.showWarning} />
-				<button onClick={this.handleToggleClick}>
-					{this.state.showWarning ? 'Hide' : 'Show'}
-				</button>
-			</div>
-		);
-	}
-}
+// 	render() {
+// 		return (
+// 			<div>
+// 				<button onClick={this.handleToggleClick}>
+// 					{this.state.showWarning ? 'Hide' : 'Show'}
+// 				</button>
+// 				<WarningBanner warn={this.state.showWarning} />
+// 			</div>
+// 		);
+// 	}
+// }
 
-ReactDOM.render(
-	<Page />,
-	document.getElementById('root')
-);
-
+// ReactDOM.render(<Page />, document.getElementById('root'));
