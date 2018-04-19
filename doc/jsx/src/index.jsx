@@ -1,25 +1,22 @@
 import React, { Component } from 'react'
 import ReactDOM from "react-dom";
 
-// function formatName(user) {
-// 	return user.firstName + ' ' + user.lastName;
-// }
+function formatName(user) {
+	return user.firstName + ' ' + user.lastName;
+}
 
-// const user = {
-// 	firstName: 'Harper',
-// 	lastName: 'Perez'
-// };
+const user = {
+	firstName: 'Harper',
+	lastName: 'Perez'
+};
 
-// const element = (
-// 	<h1>
-// 		Hello, {formatName(user)}!
-// 	</h1>
-// );
+const element = (
+	<h1>
+		Hello, {formatName(user)}!
+	</h1>
+);
 
-// ReactDOM.render(
-// 	element,
-// 	document.getElementById('root')
-// );
+ReactDOM.render(element, document.getElementById('root'));
 
 //===================================
 
@@ -33,13 +30,9 @@ import ReactDOM from "react-dom";
 // 	return <MyComponents.DatePicker color="blue" />;
 // }
 
-// ReactDOM.render(
-// 	<BlueDatePicker />,
-// 	document.getElementById('root')
-// );
+// ReactDOM.render(<BlueDatePicker />, document.getElementById('root'));
 
 //========================================
-
 
 // const Button = props => {
 // 	const { kind, ...other } = props;
@@ -52,15 +45,12 @@ import ReactDOM from "react-dom";
 // 		<div>
 // 			<Button kind="primary" onClick={() => console.log("clicked!")}>
 // 				Hello World!
-// 		</Button>
+// 			</Button>
 // 		</div>
 // 	);
 // };
 
-// ReactDOM.render(
-// 	<App />,
-// 	document.getElementById('root')
-// );
+// ReactDOM.render(<App />, document.getElementById('root'));
 
 //=========================
 
@@ -76,31 +66,24 @@ import ReactDOM from "react-dom";
 // 		</ul>
 // 	);
 // }
-// ReactDOM.render(
-// 	<TodoList />,
-// 	document.getElementById('root')
-// );
+// ReactDOM.render(<TodoList />, document.getElementById('root'));
 
 //================================
 
-// Calls the children callback numTimes to produce a repeated component
-function Repeat(props) {
-	let items = [];
-	for (let i = 0; i < props.numTimes; i++) {
-		items.push(props.children(i));
-	}
-	return <div>{items}</div>;
-}
+// function Repeat(props) {
+// 	let items = [];
+// 	for (let i = 0; i < props.numTimes; i++) {
+// 		items.push(props.children(i));
+// 	}
+// 	return <div>{items}</div>;
+// }
 
-function ListOfTenThings() {
-	return (
-		<Repeat numTimes={10}>
-			{(index) => <div key={index}>This is item {index} in the list</div>}
-		</Repeat>
-	);
-}
+// function App() {
+// 	return (
+// 		<Repeat numTimes={10}>
+// 			{(index) => <div key={index}>This is item {index} in the list</div>}
+// 		</Repeat>
+// 	);
+// }
 
-ReactDOM.render(
-	<ListOfTenThings />,
-	document.getElementById('root')
-);
+// ReactDOM.render(<App />, document.getElementById('root'));
