@@ -47,7 +47,6 @@ class App extends React.Component {
     const modal = this.state.showModal ? (
       <Modal>
         <div className="modal">
-          modal
           <button onClick={this.handleHide}>Hide modal</button>
         </div>
       </Modal>
