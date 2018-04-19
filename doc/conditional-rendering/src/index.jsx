@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import ReactDOM from "react-dom"
 
-const UserGreeting = (props) => <h1>Welcome back!</h1>
-const GuestGreeting = (props) => <h1>Please sign up.</h1>
+// const UserGreeting = (props) => <h1>Welcome back!</h1>
+// const GuestGreeting = (props) => <h1>Please sign up.</h1>
 
-const Greeting = (props) => {
-	return (
-		<div>
-			{(props.isLoggedIn) ? (<UserGreeting />) : (<GuestGreeting />)}
-		</div>
-	)
-}
+// const Greeting = (props) => {
+// 	return (
+// 		<div>
+// 			{(props.isLoggedIn) ? (<UserGreeting />) : (<GuestGreeting />)}
+// 		</div>
+// 	)
+// }
 
-ReactDOM.render(<Greeting isLoggedIn={true} />, document.getElementById('root'));
+// ReactDOM.render(<Greeting isLoggedIn={true} />, document.getElementById('root'));
 
 //===========================================
 
@@ -84,41 +84,41 @@ ReactDOM.render(<Greeting isLoggedIn={true} />, document.getElementById('root'))
 
 //===========================================
 
-// const WarningBanner = (props) => {
-// 	if (!props.warn) {
-// 		return null;
-// 	}
+const WarningBanner = (props) => {
+	if (!props.warn) {
+		return null;
+	}
 
-// 	return (
-// 		<div className="warning">
-// 			Warning!
-// 		</div>
-// 	);
-// }
+	return (
+		<div className="warning">
+			Warning!
+		</div>
+	);
+}
 
-// class Page extends React.Component {
-// 	constructor(props) {
-// 		super(props);
-// 		this.state = { showWarning: true };
-// 		this.handleToggleClick = this.handleToggleClick.bind(this);
-// 	}
+class Page extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = { showWarning: true };
+		this.handleToggleClick = this.handleToggleClick.bind(this);
+	}
 
-// 	handleToggleClick() {
-// 		this.setState(prevState => ({
-// 			showWarning: !prevState.showWarning
-// 		}));
-// 	}
+	handleToggleClick() {
+		this.setState(prevState => ({
+			showWarning: !prevState.showWarning
+		}));
+	}
 
-// 	render() {
-// 		return (
-// 			<div>
-// 				<button onClick={this.handleToggleClick}>
-// 					{this.state.showWarning ? 'Hide' : 'Show'}
-// 				</button>
-// 				<WarningBanner warn={this.state.showWarning} />
-// 			</div>
-// 		);
-// 	}
-// }
+	render() {
+		return (
+			<div>
+				<button onClick={this.handleToggleClick}>
+					{this.state.showWarning ? 'Hide' : 'Show'}
+				</button>
+				<WarningBanner warn={this.state.showWarning} />
+			</div>
+		);
+	}
+}
 
-// ReactDOM.render(<Page />, document.getElementById('root'));
+ReactDOM.render(<Page />, document.getElementById('root'));

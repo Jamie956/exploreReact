@@ -1,57 +1,58 @@
 import React, { Component } from 'react'
 import ReactDOM from "react-dom"
 
-// class NameForm extends React.Component {
+// class App extends React.Component {
 // 	constructor(props) {
 // 		super(props);
-// 		this.state = { value: '' };
+// 		this.state = {
+// 			email: ''
+// 		};
 
 // 		this.handleChange = this.handleChange.bind(this);
 // 		this.handleSubmit = this.handleSubmit.bind(this);
 // 	}
 
-// 	handleChange(event) {
-// 		this.setState({ value: event.target.value });
+// 	handleChange(e) {
+// 		this.setState({ [e.target.name]: e.target.value });
 // 	}
 
-// 	handleSubmit(event) {
-// 		alert('A name was submitted: ' + this.state.value);
-// 		event.preventDefault();
+// 	handleSubmit(e) {
+// 		alert('Email: ' + this.state.email);
+// 		e.preventDefault();
 // 	}
 
 // 	render() {
 // 		return (
 // 			<form onSubmit={this.handleSubmit}>
-// 				<label>
-// 					Name:
-// 			<input type="text" value={this.state.value} onChange={this.handleChange} />
-// 				</label>
+// 				Email: <input type="text" value={this.state.email} onChange={this.handleChange} name="email" />
 // 				<input type="submit" value="Submit" />
 // 			</form>
 // 		);
 // 	}
 // }
 
-// ReactDOM.render(<NameForm />, document.getElementById('root'));
+// ReactDOM.render(<App />, document.getElementById('root'));
 
 //============================
 
-// class FlavorForm extends React.Component {
+// class App extends React.Component {
 // 	constructor(props) {
 // 		super(props);
-// 		this.state = { value: 'coconut' };
+// 		this.state = {
+// 			flavor: 'coconut'
+// 		};
 
 // 		this.handleChange = this.handleChange.bind(this);
 // 		this.handleSubmit = this.handleSubmit.bind(this);
 // 	}
 
-// 	handleChange(event) {
-// 		this.setState({ value: event.target.value });
+// 	handleChange(e) {
+// 		this.setState({ [e.target.name]: e.target.value });
 // 	}
 
-// 	handleSubmit(event) {
-// 		alert('Your favorite flavor is: ' + this.state.value);
-// 		event.preventDefault();
+// 	handleSubmit(e) {
+// 		alert('Your favorite flavor is: ' + this.state.flavor);
+// 		e.preventDefault();
 // 	}
 
 // 	render() {
@@ -59,7 +60,7 @@ import ReactDOM from "react-dom"
 // 			<form onSubmit={this.handleSubmit}>
 // 				<label>
 // 					Pick your favorite La Croix flavor:
-// 					<select value={this.state.value} onChange={this.handleChange}>
+// 					<select value={this.state.flavor} onChange={this.handleChange} name="flavor" >
 // 						<option value="grapefruit">Grapefruit</option>
 // 						<option value="lime">Lime</option>
 // 						<option value="coconut">Coconut</option>
@@ -72,45 +73,41 @@ import ReactDOM from "react-dom"
 // 	}
 // }
 
-// ReactDOM.render(<FlavorForm />, document.getElementById('root'));
+// ReactDOM.render(<App />, document.getElementById('root'));
 
 //=====================================
-class Reservation extends Component {
+
+class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isGoing: '',
-			numberOfGuests: ''
+			username: '',
+			email: ''
 		};
-		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
-	handleInputChange(e) {
+	handleChange(e) {
 		this.setState({
 			[e.target.name]: e.target.value
 		});
 	}
 	handleSubmit(event) {
-		alert('A name was submitted: ' + this.state.isGoing);
-		alert('A name was submitted: ' + this.state.numberOfGuests);
+		alert('username: ' + this.state.username);
+		alert('email: ' + this.state.email);
 		event.preventDefault();
 	}
+
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<label>
-					Is going:
-					<input name="isGoing" type="text" value={this.state.isGoing} onChange={this.handleInputChange} />
-				</label>
+				UserName: <input name="username" type="text" value={this.state.username} onChange={this.handleChange} />
 				<br />
-				<label>
-					Number of guests:
-					<input name="numberOfGuests" type="text" value={this.state.numberOfGuests} onChange={this.handleInputChange} />
-				</label>
+				Email: <input name="email" type="text" value={this.state.email} onChange={this.handleChange} />
 				<input type="submit" value="Submit" />
 			</form>
 		);
 	}
 }
 
-ReactDOM.render(<Reservation />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
