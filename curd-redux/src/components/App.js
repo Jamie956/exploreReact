@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
+import { Link, Match } from 'react-router';
+import GamesPage from './GamesPage';
 
-export class App extends Component {
+class App extends Component {
     render() {
         return (
             <div>
-                hello world.
-      </div>
+                <GamesPage />
+                {/* <Link to="games">Games</Link>
+                <hr />
+                <Match pattern="/games" component={GamesPage} /> */}
+            </div>
         )
     }
 }
