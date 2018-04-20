@@ -49,19 +49,21 @@ const rawData = [{
 }]
 
 const requestData = (pageSize, page, sorted, filtered) => {
+  console.log('call requestData')
   return new Promise((resolve, reject) => {
-    // You can retrieve your data however you want, in this case, we will just use some local data.
     let filteredData = rawData;
 
-    // You can use the filters in your request, but you are responsible for applying them.
     if (filtered.length) {
+      console.log('need filter')
       filteredData = filtered.reduce((filteredSoFar, nextFilter) => {
         return filteredSoFar.filter(row => {
           return (row[nextFilter.id] + "").includes(nextFilter.value);
         });
       }, filteredData);
     }
-    // You can also use the sorting in your request, but again, you are responsible for applying it.
+
+    console.log(filteredData)
+
     const sortedData = _.orderBy(
       filteredData,
       sorted.map(sort => {
@@ -77,13 +79,13 @@ const requestData = (pageSize, page, sorted, filtered) => {
       sorted.map(d => (d.desc ? "desc" : "asc"))
     );
 
-    // You must return an object containing the rows of the current page, and optionally the total pages number.
+    console.log(sortedData)
+
     const res = {
       rows: sortedData.slice(pageSize * page, pageSize * page + pageSize),
       pages: Math.ceil(filteredData.length / pageSize)
     };
 
-    // Here we'll simulate a server response with 500ms of delay.
     setTimeout(() => resolve(res), 500);
   });
 };
@@ -98,18 +100,16 @@ class App extends React.Component {
     };
     this.fetchData = this.fetchData.bind(this);
   }
+  
   fetchData(state, instance) {
-    // Whenever the table model changes, or the user sorts or changes pages, this method gets called and passed the current table model.
-    // You can set the `loading` prop of the table to true to use the built-in one or show you're own loading bar if you want.
+    console.log('call fetchData')
     this.setState({ loading: true });
-    // Request the data however you want.  Here, we'll use our mocked service we created earlier
     requestData(
       state.pageSize,
       state.page,
       state.sorted,
       state.filtered
     ).then(res => {
-      // Now just get the rows of data to your React Table (and update anything else like total pages or loading)
       this.setState({
         data: res.rows,
         pages: res.pages,
@@ -123,30 +123,12 @@ class App extends React.Component {
 
     const columns = [
       {
-        Header: "Info",
-        columns: [
-          {
-            Header: 'Name',
-            accessor: 'name' // String-based value accessors!
-          }, {
-            Header: 'Age',
-            accessor: 'age',
-            Cell: props => <span className='number'>{props.value}</span> // Custom cell components!
-          },
-        ]
-      },
-      {
-        Header: 'Friend',
-        columns: [
-          {
-            id: 'friendName', // Required because our accessor is not a string
-            Header: 'Friend Name',
-            accessor: d => d.friend.name // Custom value accessors!
-          }, {
-            Header: props => <span>Friend Age</span>, // Custom header components!
-            accessor: 'friend.age'
-          }
-        ]
+        Header: 'Name',
+        accessor: 'name'
+      }, {
+        Header: 'Age',
+        accessor: 'age',
+        Cell: e => <h4>{e.value}</h4>
       }
     ]
 
