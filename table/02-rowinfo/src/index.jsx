@@ -27,11 +27,11 @@ class App extends React.Component {
         columns: [
           {
             Header: 'Name',
-            accessor: 'name' // String-based value accessors!
+            accessor: 'name'
           }, {
             Header: 'Age',
             accessor: 'age',
-            Cell: props => <span className='number'>{props.value}</span> // Custom cell components!
+            Cell: e => <h4>{e.value}</h4>
           },
         ]
       },
@@ -39,11 +39,11 @@ class App extends React.Component {
         Header: 'Friend',
         columns: [
           {
-            id: 'friendName', // Required because our accessor is not a string
+            id: 'friendName',
             Header: 'Friend Name',
-            accessor: d => d.friend.name // Custom value accessors!
+            accessor: e => <h1 >{e.friend.name}</h1>
           }, {
-            Header: props => <span>Friend Age</span>, // Custom header components!
+            Header: <h2>Friend Age</h2>,
             accessor: 'friend.age'
           }
         ]
@@ -60,20 +60,28 @@ class App extends React.Component {
         <ReactTable
           data={data}
           columns={columns}
-          getTdProps={(state, rowInfo, column, instance) => {
-            return {
-              onMouseEnter: e =>
-                console.log("Cell - onMouseEnter", {
-                  state,
-                  rowInfo,
-                  column,
-                  instance,
-                  event: e
-                })
-            };
-          }}
           defaultPageSize={5}
           className="-striped -highlight"
+          // getTdProps={(state, rowInfo, column, instance) => {
+          //   return {
+          //     onMouseEnter: e =>
+          //       console.log("Cell - onMouseEnter", {
+          //         state,
+          //         rowInfo,
+          //         column,
+          //         instance,
+          //         event: e
+          //       })
+          //   };
+          // }}
+          getTdProps={(state, rowInfo, column, instance) => {
+            return {
+              onClick: (e, handleOriginal) => {
+                console.log(e)
+                alert(rowInfo.row.name)
+              }
+            }
+          }}
         />
       </div>
     );
@@ -81,3 +89,9 @@ class App extends React.Component {
 }
 
 render(<App />, document.getElementById("root"));
+
+
+
+
+
+
