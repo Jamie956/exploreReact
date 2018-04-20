@@ -1,103 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from "react-dom";
 
-// const getDisplayName = (el) => {
-//   return el && el.type && (el.type.displayName || el.type.name);
-// };
-
-// const renderChangeRate = (changeRate) => {  };
-
-// const renderThs = (columns) => {
-//   return columns.map((col, index) => {
-//     const { name, dataKey, th } = col.props;
-//     const props = { name, dataKey, colIndex: index };
-//     let content;
-//     let className;
-
-//     if (React.isValidElement(th)) {
-//       content = React.cloneElement(th, props);
-//       className = getDisplayName(th);
-//     } else if (_.isFunction(th)) {
-//       content = th(props);
-//     } else {
-//       content = name || '';
-//     }
-
-//     return (
-//       <th
-//         key={`th-${index}`}
-//         style={getStyle(col.props)}
-//         className={`table-th col-${index} col-${dataKey} ${className || ''}`}
-//       >
-//         {content}
-//       </th>
-//     );
-//   });
-// };
-
-// const renderTds = (data, entry, columns, rowIndex) => {
-//   return columns.map((col, index) => {
-//     const { dataKey, td } = col.props;
-//     const value = getValueOfTd(entry, dataKey);
-//     const props = { data, rowData: entry, tdValue: value, dataKey, rowIndex, colIndex: index };
-
-//     let content;
-//     let className;
-//     if (React.isValidElement(td)) {
-//       content = React.cloneElement(td, props);
-//       className = getDisplayName(td);
-//     } else if (td === 'changeRate') {
-//       content = renderChangeRate(value || '');
-//     } else if (_.isFunction(td)) {
-//       content = td(props);
-//     } else {
-//       content = formatIndex(parseValueOfTd(value), dataKey, td);
-//     }
-
-//     return (
-//       <td
-//         key={`td-${index}`}
-//         style={getStyle(col.props)}
-//         className={`table-td col-${index} col-${dataKey} ${className || ''}`}
-//       >
-//         {content}
-//       </td>
-//     );
-//   });
-// };
-
-// const renderRows = (data, columns) => {
-//   if (!data || !data.length) {return null;}
-
-//   return data.map((entry, index) => {
-//     return (
-//       <tr className="table-tbody-tr" key={`tr-${index}`}>
-//         {renderTds(data, entry, columns, index)}
-//       </tr>
-//     );
-//   });
-// };
-
-// function Table(props) {
-//   const { children, data, className } = props;
-//   const columns = findChildrenByType(children, Column);
-
-//   return (
-//     <div className={`table-container ${className || ''}`}>
-//       <table className="base-table">
-//         {hasNames(columns) && (
-//           <thead>
-//             <tr className="table-thead-tr">
-//               {renderThs(columns)}
-//             </tr>
-//           </thead>
-//         )}
-//         <tbody>{renderRows(data, columns)}</tbody>
-//       </table>
-//     </div>
-//   );
-// }
-
 const data = [
   {
     id: 1,
@@ -108,6 +11,11 @@ const data = [
     id: 2,
     name: 'moni',
     age: 28
+  },
+  {
+    id: 3,
+    name: 'nufi',
+    age: 16
   }
 ]
 
@@ -119,27 +27,53 @@ const columns = [
   {
     header: 'Age',
     accessor: 'age'
-  }
+  },
+  {
+    header: 'ID',
+    accessor: 'id'
+  },
 ]
 
+const renderThs = (columns) => {
+  return (
+    columns.map((column, i) =>
+      <th key={i}>{column.header}</th>
+    )
+  )
+}
+
+const renderRows = (rows, columns) => {
+  return (
+    rows.map((row, i) =>
+      <tr key={i}>
+        {renderCell(row, columns)}
+      </tr>
+    )
+  )
+}
+
+const renderCell = (row, columns) => {
+  return (
+    columns.map((column, i) =>
+      <td key={i}>
+        {row[column.accessor]}
+      </td>
+    )
+  )
+}
+
 const Table = (props) => {
+  const { columns, rows } = props
   return (
     <div>
       <table border="1">
         <thead>
           <tr>
-            {props.columns.map((column, i) => 
-              <th key={i}>{column.header}</th>
-            )}
+            {renderThs(columns)}
           </tr>
         </thead>
         <tbody>
-          {props.data.map((d, i) =>
-            <tr key={i}>
-              <td>{d.name}</td>
-              <td>{d.age}</td>
-            </tr>
-          )}
+          {renderRows(rows, columns)}
         </tbody>
       </table>
     </div>
@@ -148,7 +82,7 @@ const Table = (props) => {
 
 ReactDOM.render(
   <Table
-    data={data}
+    rows={data}
     columns={columns}
   />
   , document.getElementById('root')
