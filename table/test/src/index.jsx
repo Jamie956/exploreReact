@@ -98,24 +98,58 @@ import ReactDOM from "react-dom";
 //   );
 // }
 
-const App = () =>{
+const data = [
+  {
+    id: 1,
+    name: 'tom',
+    age: 18
+  },
+  {
+    id: 2,
+    name: 'moni',
+    age: 28
+  }
+]
+
+const columns = [
+  {
+    header: 'Name',
+    accessor: 'name'
+  },
+  {
+    header: 'Age',
+    accessor: 'age'
+  }
+]
+
+const Table = (props) => {
   return (
-    <table>
-      <thead>
-        <th>name</th>
-        <th>age</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>tom</td>
-          <td>18</td>
-        </tr>
-        <tr>
-          <td>miko</td>
-          <td>28</td>
-        </tr>
-      </tbody>
-    </table>
+    <div>
+      <table border="1">
+        <thead>
+          <tr>
+            {props.columns.map((column, i) => 
+              <th key={i}>{column.header}</th>
+            )}
+          </tr>
+        </thead>
+        <tbody>
+          {props.data.map((d, i) =>
+            <tr key={i}>
+              <td>{d.name}</td>
+              <td>{d.age}</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
   )
 }
-ReactDOM.render(<App />, document.getElementById('root'));
+
+ReactDOM.render(
+  <Table
+    data={data}
+    columns={columns}
+  />
+  , document.getElementById('root')
+);
