@@ -27,7 +27,15 @@ var browserConfig = {
   plugins: [
     new webpack.DefinePlugin({
       __isBrowser__: "true"
-    })
+    }),
+    new ReactLoadablePlugin({
+      filename: './public/react-loadable.json',
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+			name: 'manifest',
+      filename: 'manifest.js',
+      minChunks: Infinity
+		})
   ]
 }
 
@@ -49,7 +57,7 @@ var serverConfig = {
           loader: 'babel-loader',
           options: {
             presets: ['es2015', 'react', 'stage-0'],
-            plugins: ['react-loadable/babel']
+            // plugins: ['react-loadable/babel']
           }
         }
       },
@@ -59,9 +67,9 @@ var serverConfig = {
     new webpack.DefinePlugin({
       __isBrowser__: "false"
     }),
-    new ReactLoadablePlugin({
-      filename: './public/react-loadable.json',
-    }),
+    // new ReactLoadablePlugin({
+    //   filename: './public/react-loadable.json',
+    // }),
   ]
 }
 

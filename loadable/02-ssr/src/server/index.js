@@ -1,19 +1,18 @@
 import express from "express"
-// import cors from "cors"
 import { renderToString } from "react-dom/server"
 import App from '../shared/App'
 import React from 'react'
 import Loadable from 'react-loadable';
 
-const app = express()
+import { getBundles } from 'react-loadable/webpack'
+import stats from './../../public/react-loadable.json';
 
-// app.use(cors())
+const app = express()
 
 app.use(express.static("public"))
 
-app.get("/", (req, res, next) => {
+app.get("/test1", (req, res, next) => {
   const markup = renderToString(<App />)
-
   res.send(`
     <!DOCTYPE html>
     <html>
@@ -29,18 +28,28 @@ app.get("/", (req, res, next) => {
   `)
 })
 
-app.get('/hi', (req, res) => {
+app.get('/test2', (req, res) => {
   let modules = [];
 
   let html = renderToString(
     <Loadable.Capture report={moduleName => modules.push(moduleName)}>
-      <App/>
+      <App />
     </Loadable.Capture>
   );
 
-  console.log(modules);
+  let bundles = getBundles(stats, modules);
 
-  res.send(`${html}`);
+  res.send(`
+  <!doctype html>
+  <html lang="en">
+    <body>
+      <div id="app">${html}</div>
+      ${bundles.map(bundle => {
+        return `<script src="${bundle.file}" defer></script>`
+      }).join('\n')}
+    </body>
+  </html>
+`);
 });
 
 Loadable.preloadAll().then(() => {
