@@ -1,16 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 const Layout = () => (
-    <Router>
+    <BrowserRouter>
         <div>
             <h2>Accounts</h2>
             <ul>
                 <li><Link to="/netflix">Netflix</Link></li>
                 <li><Link to="/zillow-group">Zillow Group</Link></li>
-                <li><Link to="/yahoo">Yahoo</Link></li>
-                <li><Link to="/modus-create">Modus Create</Link></li>
 
                 <hr />
                 <li><Link to="/order/asc">asc</Link></li>
@@ -22,7 +20,7 @@ const Layout = () => (
             <Route path="/:id" component={Child} />
             <Route path="/order/:direction(asc|desc)" component={ComponentWithRegex} />
         </div>
-    </Router>
+    </BrowserRouter>
 );
 
 const Child = ({ match }) => (
