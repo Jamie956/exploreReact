@@ -3,6 +3,7 @@ import cors from "cors"
 import { renderToString } from "react-dom/server"
 import App from '../shared/App'
 import React from 'react'
+import Loadable from 'react-loadable';
 
 const app = express()
 
@@ -28,6 +29,8 @@ app.get("*", (req, res, next) => {
   `)
 })
 
-app.listen(3000, () => {
-  console.log(`Server is listening on port: 3000`)
-})
+Loadable.preloadAll().then(() => {
+  app.listen(3000, () => {
+    console.log('Running on http://localhost:3000/');
+  });
+});
