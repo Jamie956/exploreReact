@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var nodeExternals = require('webpack-node-externals')
+const ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
 
 var browserConfig = {
   entry: './src/browser/index.js',
@@ -47,7 +48,8 @@ var serverConfig = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['es2015', 'react', 'stage-0']
+            presets: ['es2015', 'react', 'stage-0'],
+            plugins: ['react-loadable/babel']
           }
         }
       },
@@ -56,7 +58,10 @@ var serverConfig = {
   plugins: [
     new webpack.DefinePlugin({
       __isBrowser__: "false"
-    })
+    }),
+    new ReactLoadablePlugin({
+      filename: './public/react-loadable.json',
+    }),
   ]
 }
 

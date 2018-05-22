@@ -1,5 +1,5 @@
 import express from "express"
-import cors from "cors"
+// import cors from "cors"
 import { renderToString } from "react-dom/server"
 import App from '../shared/App'
 import React from 'react'
@@ -7,11 +7,11 @@ import Loadable from 'react-loadable';
 
 const app = express()
 
-app.use(cors())
+// app.use(cors())
 
 app.use(express.static("public"))
 
-app.get("*", (req, res, next) => {
+app.get("/", (req, res, next) => {
   const markup = renderToString(<App />)
 
   res.send(`
@@ -28,6 +28,20 @@ app.get("*", (req, res, next) => {
     </html>
   `)
 })
+
+app.get('/hi', (req, res) => {
+  let modules = [];
+
+  let html = renderToString(
+    <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+      <App/>
+    </Loadable.Capture>
+  );
+
+  console.log(modules);
+
+  res.send(`${html}`);
+});
 
 Loadable.preloadAll().then(() => {
   app.listen(3000, () => {
