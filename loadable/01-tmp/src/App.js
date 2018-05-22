@@ -6,6 +6,8 @@ import Loading from './components/Loading';
 const Home = Loadable({
   loader: () => import('./components/Home'),
   loading: Loading,
+  delay: 300, // 0.3 seconds
+  timeout: 10000, // 10 seconds
 });
 
 const About = Loadable({
