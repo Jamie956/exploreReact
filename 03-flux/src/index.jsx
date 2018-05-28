@@ -1,38 +1,19 @@
 import React, { Component } from "react";
+import ReactDOM, { render } from "react-dom";
 import { Dispatcher } from "flux";
 
-/**
- * action types
- */
-const ADD = 'ADD'
-const UPDATE = 'UPDATE'
-
-/*
- * action creators
- */
-const addActionCreator = (text) => {
-  return { type: ADD, text }
-}
-const updateActionCreator = (text) => {
-  return { type: UPDATE, text }
-}
-
-/**
- * Dispatcher
- */
 const dispatcher = new Dispatcher;
 
-/**
- * reducer
- */
 const handleActions = (action) => {
   switch (action.type) {
-    case ADD: {
+    case 'ADD': {
       console.log('ADD');
+      console.log(action.text);
       break;
     }
-    case UPDATE: {
+    case 'UPDATE': {
       console.log('UPDATE');
+      console.log(action.text);      
       break;
     }
   }
@@ -43,13 +24,13 @@ dispatcher.register(handleActions.bind(handleActions));
  * action
  */
 const addAction = (text) => {
-  dispatcher.dispatch(addActionCreator(text));
+  dispatcher.dispatch({ type: 'ADD', text });
 }
 const updateAction = (text) => {
-  dispatcher.dispatch(updateActionCreator(text));
+  dispatcher.dispatch({ type: 'UPDATE', text });
 }
 
-export default class Layout extends Component {
+ class Layout extends Component {
   render() {
     return (
       <div>
@@ -59,3 +40,6 @@ export default class Layout extends Component {
     );
   }
 }
+
+
+render(<Layout /> , document.getElementById('root'));
