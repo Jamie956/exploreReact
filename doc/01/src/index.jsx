@@ -52,5 +52,52 @@ function App3() {
   return <SplitPane left={<Foo />} right={<Bar />} />;
 }
 
+//condition render component
+const UserGreeting = props => <h1>Welcome back!</h1>;
+const GuestGreeting = props => <h1>Please sign up.</h1>;
+
+const App5 = props => {
+  return <div>{true ? <UserGreeting /> : <GuestGreeting />}</div>;
+};
+
+//condition render using &&
+function Mailbox({ unreadMessages }) {
+  return (
+    <div>
+      <h1>Hello!</h1>
+      {unreadMessages.length > 0 && (
+        <h2>You have {unreadMessages.length} unread messages.</h2>
+      )}
+    </div>
+  );
+}
+const App6 = () => {
+  const messages = ["React", "Re: React", "Re:Re: React"];
+  return <Mailbox unreadMessages={messages} />;
+};
+
+//prevState
+class App4 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { status: true };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick() {
+    this.setState(prevState => ({
+      status: !prevState.status
+    }));
+  }
+
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleToggleClick}>click</button>
+        <div>{this.state.status ? "Hide" : "Show"}</div>
+      </div>
+    );
+  }
+}
 
 ReactDOM.render(<App4 />, document.getElementById("root"));
