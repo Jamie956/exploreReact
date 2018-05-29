@@ -100,4 +100,80 @@ class App4 extends React.Component {
   }
 }
 
-ReactDOM.render(<App4 />, document.getElementById("root"));
+//form
+class App1 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: ""
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleSubmit(e) {
+    alert("Email: " + this.state.email);
+    e.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        Email:{" "}
+        <input
+          type="text"
+          value={this.state.email}
+          onChange={this.handleChange}
+          name="email"
+        />
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+
+//select
+class App7 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      flavor: "coconut"
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleSubmit(e) {
+    alert("Your favorite flavor is: " + this.state.flavor);
+    e.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          <select
+            value={this.state.flavor}
+            onChange={this.handleChange}
+            name="flavor"
+          >
+            <option value="coconut">Coconut</option>
+            <option value="mango">Mango</option>
+          </select>
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+ReactDOM.render(<App7 />, document.getElementById("root"));
