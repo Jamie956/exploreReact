@@ -1,83 +1,55 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import { EventEmitter } from "events";
 
-const Row = (props) => {
-	return (
-		<li>
-			<span>{props.text}</span>
-		</li>
-	)
-}
+import { User } from "./User.jsx";
+import { Rows } from "./Rows.jsx";
 
-class Store extends EventEmitter {
-	constructor() {
-		super()
-		this.tasks = [
-			{
-				id: 1,
-				text: "Home Work"
-			},
-			{
-				id: 2,
-				text: "Game"
-			}
-		];
-	};
 
-	addTask(text) {
-		const id = Date.now();
-		this.tasks.push({
-			id,
-			text
-		});
-		this.emit("change");
-	};
-
-	listTasks() {
-		return this.tasks;
-	};
-}
-const store = new Store;
+const userStore = new User();
 
 class Main extends Component {
-	constructor() {
-		super();
-		this.state = {
-			tasks: store.listTasks(),
-			task: ''
-		};
-		this.handleClick = this.handleClick.bind(this)
-	}
+  constructor() {
+    super();
+    this.state = {
+      users: userStore.findAll(),
+      user: ""
+    };
+	this.handleClick = this.handleClick.bind(this);
+	this.handleChange = this.handleChange.bind(this)
+  }
 
-	componentWillMount() {
-		store.on("change", () => {
-			this.setState({
-				tasks: store.listTasks(),
-			});
-		});
-	};
+  componentWillMount() {
+    userStore.on("change", () => {
+      this.setState({
+        users: userStore.findAll()
+      });
+    });
+  }
 
-	handleClick() {
-		store.addTask(this.state.task)
-		this.setState({
-			task: ''
-		});
-	}
-	
-	render() {
-		const { task, tasks } = this.state;
-		return (
-			<div>
-				<input type="text" name="task" value={task} onChange={(e) => { this.setState({ [e.target.name]: e.target.value }) }} />
-				<button onClick={this.handleClick}>add</button>
-				{tasks.map(task =>
-					<Row key={task.id} {...task} />
-				)}
+  handleClick() {
+    userStore.add(this.state.user);
+    this.setState({
+      user: ""
+    });
+  }
 
-			</div>
-		);
-	}
+  handleChange(e){
+	this.setState({ [e.target.name]: e.target.value })
+  }
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          name="user"
+          value={this.state.user}
+          onChange={this.handleChange}
+        />
+        <button onClick={this.handleClick}>add</button>
+        <Rows users={this.state.users} />
+      </div>
+    );
+  }
 }
 
-render(<Main />, document.getElementById('root'));
+render(<Main />, document.getElementById("root"));
