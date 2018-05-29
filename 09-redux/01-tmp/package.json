@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.jsx",
   "dependencies": {
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
     "redux": "^3.7.2"
   },
   "devDependencies": {
