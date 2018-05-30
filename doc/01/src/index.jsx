@@ -202,4 +202,20 @@ const App9 = () => {
   );
 };
 
-ReactDOM.render(<App9 />, document.getElementById("root"));
+//childrens
+function Repeat(props) {
+  let items = [];
+  for (let i = 0; i < props.numTimes; i++) {
+    items.push(props.children(i));
+  }
+  return <div>{items}</div>;
+}
+function App10() {
+  return (
+    <Repeat numTimes={10}>
+      {(index) => <div key={index}>This is item {index} in the list</div>}
+    </Repeat>
+  );
+}
+
+ReactDOM.render(<App10 />, document.getElementById("root"));
