@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 
 //string as props
 function Welcome({ name }) {
@@ -182,7 +183,7 @@ const MyComponents = {
   DatePicker: ({ color }) => {
     return <div>Imagine a {color} datepicker here.</div>;
   }
-}
+};
 
 function App8() {
   return <MyComponents.DatePicker color="blue" />;
@@ -190,14 +191,14 @@ function App8() {
 
 //...
 const Button = ({ kind, ...other }) => {
-  return <button className={(kind === "a") ? "a" : "b"} {...other} />;
+  return <button className={kind === "a" ? "a" : "b"} {...other} />;
 };
 const App9 = () => {
   return (
     <div>
-      <Button kind="a" onClick={() => alert('click')}>
+      <Button kind="a" onClick={() => alert("click")}>
         Hello World!
-			</Button>
+      </Button>
     </div>
   );
 };
@@ -213,9 +214,51 @@ function Repeat(props) {
 function App10() {
   return (
     <Repeat numTimes={10}>
-      {(index) => <div key={index}>This is item {index} in the list</div>}
+      {index => <div key={index}>This is item {index} in the list</div>}
     </Repeat>
   );
 }
 
-ReactDOM.render(<App10 />, document.getElementById("root"));
+//propTypes
+const Greeting = ({ name, age }) => (
+  <h1>
+    Hello, {name}, {age}
+  </h1>
+);
+
+class App11 extends React.Component {
+  render() {
+    return <Greeting name={"tom"} age={18} />;
+  }
+}
+
+Greeting.propTypes = {
+  name: PropTypes.string,
+  age: PropTypes.number.isRequired
+};
+
+//ref
+class App12 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    alert("name: " + this.name.value);
+    alert("email: " + this.email.value);
+    e.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        Name: <input type="text" ref={e => (this.name = e)} />
+        Email: <input defaultValue="email" type="text" ref={e => (this.email = e)} />
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+
+ReactDOM.render(<App12 />, document.getElementById("root"));
