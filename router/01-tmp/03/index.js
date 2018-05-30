@@ -2,21 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Link, Redirect, withRouter } from "react-router-dom";
 
-const Layout = () => (
-    <BrowserRouter>
-        <div>
-            <AuthButton />
-            <ul>
-                <li><Link to="/public">Public Page</Link></li>
-                <li><Link to="/protected">Protected Page</Link></li>
-            </ul>
-            <Route path="/public" component={Public} />
-            <Route path="/login" component={Login} />
-            <PrivateRoute path="/protected" component={Protected} />
-        </div>
-    </BrowserRouter>
-);
-
 const fakeAuth = {
     isAuthenticated: false,
     authenticate(cb) {
@@ -79,4 +64,20 @@ class Login extends React.Component {
         );
     }
 }
+
+const Layout = () => (
+    <BrowserRouter>
+        <div>
+            <AuthButton />
+            <ul>
+                <li><Link to="/public">Public Page</Link></li>
+                <li><Link to="/protected">Protected Page</Link></li>
+            </ul>
+            <Route path="/public" component={Public} />
+            <Route path="/login" component={Login} />
+            <PrivateRoute path="/protected" component={Protected} />
+        </div>
+    </BrowserRouter>
+);
+
 ReactDOM.render(<Layout />, document.getElementById('root'));

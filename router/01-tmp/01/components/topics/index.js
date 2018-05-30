@@ -15,7 +15,7 @@ export class Topics extends Component {
         <ul>
           <li><Link to={`${match.url}/a`}>Art</Link></li>
           <li><Link to={`${match.url}/b`}>Health</Link></li>
-          <li><Link to={`${match.url}/c`}>ccccc</Link></li>
+          <li><Link to={`${match.url}/c`}>Music</Link></li>
         </ul>
 
         <Route path={`${match.url}/a`} component={Art} />
