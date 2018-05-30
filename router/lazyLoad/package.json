@@ -19,7 +19,8 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "start": "webpack -w"
+    "start": "webpack-dev-server",
+    "build-dev": "webpack -w"
   },
   "author": "",
   "license": "ISC"

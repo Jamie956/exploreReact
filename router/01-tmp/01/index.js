@@ -180,7 +180,7 @@ const App9 = () => (
   </BrowserRouter>
 );
 
-//
+//config
 const Main = () => <h2>Main</h2>;
 const Sandwiches = () => <h2>Sandwiches</h2>;
 const Bus = () => <h3>Bus</h3>;

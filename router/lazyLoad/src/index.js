@@ -1,57 +1,48 @@
-// ReactDOM.render(
-//     (
-//         <Router history={browserHistory}>
-//             {/* 主页 */}
-//             <Route path="/" component={App}>
-//                 {/* 默认 */}
-//                 <IndexRoute component={HomePage} />
-
-//                 {/* baidu */}
-//                 <Route path="/baidu" component={BaiduPage}>
-//                     <Route path="result" component={BaiduResultPage} />
-//                     <Route path="frequency" component={BaiduFrequencyPage} />
-//                 </Route>
-
-//                 {/* 404 */}
-//                 <Route path='/404' component={NotFoundPage} />
-
-//                 {/* 其他重定向到 404 */}
-//                 <Redirect from='*' to='/404' />
-//             </Route>
-//         </Router>
-//     ), document.getElementById('app')
-// );
-
-import React from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { Router, browserHistory } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Link,
+} from "react-router-dom";
 
-const rootRoute = {
-    path: '/',
-    indexRoute: {
-        getComponent(nextState, cb) {
-            require.ensure([], (require) => {
-                cb(null, require('./components/layer/HomePage'))
-            }, 'HomePage')
-        },
-    },
-    getComponent(nextState, cb) {
-        require.ensure([], (require) => {
-            cb(null, require('./components/Main'))
-        }, 'Main')
-    },
-    childRoutes: [
-        require('./routes/baidu'),
-        require('./routes/404'),
-        require('./routes/redirect')
-    ]
-}
+import { Home } from "./Home";
+import { Bubblegum } from "./Bubblegum";
+import { Shoelaces } from "./Shoelaces";
 
-ReactDOM.render(
-    (
-        <Router
-            history={browserHistory}
-            routes={rootRoute}
+const routes = [
+  {
+    path: "/",
+    exact: true,
+    main: () => <Home />
+  },
+  {
+    path: "/bubblegum",
+    main: () => <Bubblegum />
+  },
+  {
+    path: "/shoelaces",
+    main: () => <Shoelaces />
+  }
+];
+
+const App9 = () => (
+  <BrowserRouter>
+    <div>
+      <Link to="/">Home</Link> |
+      <Link to="/bubblegum">Bubblegum</Link> |
+      <Link to="/shoelaces">Shoelaces</Link>
+      <hr />
+      {routes.map((route, index) => (
+        <Route
+          key={index}
+          path={route.path}
+          exact={route.exact}
+          component={route.main}
         />
-    ), document.getElementById('root')
+      ))}
+    </div>
+  </BrowserRouter>
 );
+
+ReactDOM.render(<App9 />, document.getElementById("root"));
