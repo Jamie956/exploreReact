@@ -31,7 +31,6 @@ class AddUser extends Component {
 			}
 			return response.json();
 		}).then(function (data) {
-			console.log(data)
 			if (data == "success") {
 				this.setState({ msg: "Thanks for registering" });
 			}
@@ -51,12 +50,8 @@ class AddUser extends Component {
 			<div>
 				<h1>Create</h1>
 				<form onSubmit={this.handleSubmit}>
-					<label htmlFor="name">name </label>
-					<input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
-					<br />
-					<label htmlFor="email">email </label>
-					<input type="text" name="email" value={this.state.email} onChange={this.handleChange} />
-					<br />
+					name: <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
+					email: <input type="text" name="email" value={this.state.email} onChange={this.handleChange} />
 					<button type="submit">Submit</button>
 				</form>
 			</div>
