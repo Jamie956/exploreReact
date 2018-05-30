@@ -144,4 +144,92 @@ const NoMatch = ({ location }) => (
   </h3>
 );
 
+//config
+const routes1 = [
+  {
+    path: "/",
+    exact: true,
+    main: () => <h2>Home</h2>
+  },
+  {
+    path: "/bubblegum",
+    main: () => <h2>Bubblegum</h2>
+  },
+  {
+    path: "/shoelaces",
+    main: () => <h2>Shoelaces</h2>
+  }
+];
+
+const App9 = () => (
+  <BrowserRouter>
+    <div>
+      <Link to="/">Home</Link> |
+      <Link to="/bubblegum">Bubblegum</Link> |
+      <Link to="/shoelaces">Shoelaces</Link>
+      <hr />
+      {routes1.map((route, index) => (
+        <Route
+          key={index}
+          path={route.path}
+          exact={route.exact}
+          component={route.main}
+        />
+      ))}
+    </div>
+  </BrowserRouter>
+);
+
+//
+const Main = () => <h2>Main</h2>;
+const Sandwiches = () => <h2>Sandwiches</h2>;
+const Bus = () => <h3>Bus</h3>;
+const Cart = () => <h3>Cart</h3>;
+
+const Tacos = ({ routes }) => (
+  <div>
+    <Link to="/tacos/bus">Bus</Link> |
+    <Link to="/tacos/cart">Cart</Link>
+    {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+  </div>
+);
+
+const routes = [
+  {
+    path: "/sandwiches",
+    component: Sandwiches
+  },
+  {
+    path: "/tacos",
+    component: Tacos,
+    routes: [
+      {
+        path: "/tacos/bus",
+        component: Bus
+      },
+      {
+        path: "/tacos/cart",
+        component: Cart
+      }
+    ]
+  }
+];
+
+const RouteWithSubRoutes = route => (
+  <Route
+    path={route.path}
+    render={props => <route.component {...props} routes={route.routes} />}
+  />
+);
+
+const App7 = () => (
+  <BrowserRouter>
+    <div>
+      <Link to="/tacos">Tacos</Link> |
+      <Link to="/sandwiches">Sandwiches</Link>
+      {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+    </div>
+  </BrowserRouter>
+);
+
 ReactDOM.render(<App7 />, document.getElementById("root"));
