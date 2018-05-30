@@ -5,7 +5,9 @@ import {
   Route,
   Link,
   withRouter,
-  Prompt
+  Prompt,
+  Switch,
+  Redirect
 } from "react-router-dom";
 
 const Home = () => <div>Home</div>;
@@ -114,25 +116,32 @@ const App6 = () => (
 
 const MyLink = ({ label, to }) => <Link to={to}>{label}</Link>;
 
-//Prompt
-const App7 = () => (
+//not match
+const App8 = () => (
   <BrowserRouter>
-    <Link to="/">Form</Link>
-    <Route path="/" exact component={Form} />
+    <div>
+      <Link to="/">Home1</Link> |
+      <Link to="/old-match">Old Match, to be redirected</Link> |
+      <Link to="/will-match">Will Match</Link> |
+      <Link to="/will-not-match">Will Not Match</Link> |
+      <Link to="/also/will/not/match">Also Will Not Match</Link>
+      <hr />
+      <Switch>
+        <Route path="/" exact component={Home1} />
+        <Redirect from="/old-match" to="/will-match" />
+        <Route path="/will-match" component={WillMatch} />
+        <Route component={NoMatch} />
+      </Switch>
+    </div>
   </BrowserRouter>
 );
 
-class Form extends React.Component {
-  render() {
-    return (
-      <Prompt
-        when={true}
-        message={location =>
-          `Are you sure you want to go to ${location.pathname}`
-        }
-      />
-    );
-  }
-}
+const Home1 = () => <h1>Home1</h1>;
+const WillMatch = () => <h1>WillMatch</h1>;
+const NoMatch = ({ location }) => (
+  <h3>
+    No match for <code>{location.pathname}</code>
+  </h3>
+);
 
 ReactDOM.render(<App7 />, document.getElementById("root"));
