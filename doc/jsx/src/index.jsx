@@ -20,37 +20,37 @@ ReactDOM.render(element, document.getElementById('root'));
 
 //===================================
 
-// const MyComponents = {
-// 	DatePicker: function DatePicker(props) {
-// 		return <div>Imagine a {props.color} datepicker here.</div>;
-// 	}
-// }
+const MyComponents = {
+	DatePicker: function DatePicker(props) {
+		return <div>Imagine a {props.color} datepicker here.</div>;
+	}
+}
 
-// function BlueDatePicker() {
-// 	return <MyComponents.DatePicker color="blue" />;
-// }
+function BlueDatePicker() {
+	return <MyComponents.DatePicker color="blue" />;
+}
 
-// ReactDOM.render(<BlueDatePicker />, document.getElementById('root'));
+ReactDOM.render(<BlueDatePicker />, document.getElementById('root'));
 
 //========================================
 
-// const Button = props => {
-// 	const { kind, ...other } = props;
-// 	const className = kind === "primary" ? "PrimaryButton" : "SecondaryButton";
-// 	return <button className={className} {...other} />;
-// };
+const Button = props => {
+	const { kind, ...other } = props;
+	const className = kind === "primary" ? "PrimaryButton" : "SecondaryButton";
+	return <button className={className} {...other} />;
+};
 
-// const App = () => {
-// 	return (
-// 		<div>
-// 			<Button kind="primary" onClick={() => console.log("clicked!")}>
-// 				Hello World!
-// 			</Button>
-// 		</div>
-// 	);
-// };
+const App = () => {
+	return (
+		<div>
+			<Button kind="primary" onClick={() => console.log("clicked!")}>
+				Hello World!
+			</Button>
+		</div>
+	);
+};
 
-// ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 //=========================
 

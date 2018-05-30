@@ -176,4 +176,30 @@ class App7 extends React.Component {
     );
   }
 }
-ReactDOM.render(<App7 />, document.getElementById("root"));
+
+//components.key
+const MyComponents = {
+  DatePicker: ({ color }) => {
+    return <div>Imagine a {color} datepicker here.</div>;
+  }
+}
+
+function App8() {
+  return <MyComponents.DatePicker color="blue" />;
+}
+
+//...
+const Button = ({ kind, ...other }) => {
+  return <button className={(kind === "a") ? "a" : "b"} {...other} />;
+};
+const App9 = () => {
+  return (
+    <div>
+      <Button kind="a" onClick={() => alert('click')}>
+        Hello World!
+			</Button>
+    </div>
+  );
+};
+
+ReactDOM.render(<App9 />, document.getElementById("root"));
