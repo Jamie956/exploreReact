@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-// import Home from './Home.jsx'
-import About from "./About.jsx";
 
 export class App extends Component {
   constructor() {
@@ -10,24 +8,24 @@ export class App extends Component {
     this.handleloadabout = this.handleloadabout.bind(this);
   }
   handleloadhome() {
-    // alert("home");
     import("./Home.jsx")
       .then(mod => {
-        // someOperate(mod);
         console.log(mod);
       })
       .catch(e => console.log("err", e));
   }
   handleloadabout() {
-    alert("about");
+    import("./About.jsx")
+      .then(mod => {
+        console.log(mod);
+      })
+      .catch(e => console.log("err", e));
   }
 
   render() {
     return (
       <div>
-        {/* <Home /> */}
-        <About />
-        <button onClick={this.handleloadhome}>load home</button>***
+        <button onClick={this.handleloadhome}>load home</button>-|-
         <button onClick={this.handleloadabout}>load about</button>
       </div>
     );
