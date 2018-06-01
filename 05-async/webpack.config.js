@@ -5,7 +5,9 @@ module.exports = {
   entry: "./03/index.jsx",
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: "bundle.js"
+    filename: "bundle.js",
+    filename: '[name].[chunkhash:8].js',
+    chunkFilename: '[name].[chunkhash:8].chunk.js',
   },
   module: {
     rules: [

@@ -4,13 +4,13 @@ import Bundle from "./Bundle.jsx";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 const Home = props => (
-  <Bundle load={() => import("./Home.jsx")}>
+  <Bundle load={() => import(/* webpackChunkName: "home" */ "./Home.jsx")}>
     {Component => <Component {...props} />}
   </Bundle>
 );
 
 const About = props => (
-  <Bundle load={() => import("./About.jsx")}>
+  <Bundle load={() => import(/* webpackChunkName: "about" */ "./About.jsx")}>
     {Component => <Component {...props} />}
   </Bundle>
 );
