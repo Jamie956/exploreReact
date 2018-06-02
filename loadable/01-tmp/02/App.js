@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Loadable from "react-loadable";
 import Loading from "./components/Loading";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 const Home = Loadable({
   loader: () => import(/* webpackChunkName: 'Home' */ "./components/Home"),
   loading: Loading,
-  delay: 300, // 0.3 seconds
-  timeout: 10000 // 10 seconds
+  delay: 300,
+  timeout: 10000
 });
 
 const About = Loadable({
@@ -17,25 +18,17 @@ const About = Loadable({
 });
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.handleHome = this.handleHome.bind(this);
-    this.handleAbout = this.handleAbout.bind(this);
-  }
-  handleHome() {
-    console.log(Home);
-  }
-  handleAbout() {
-    console.log(About);
-  }
   render() {
     return (
-      <div>
-        <Home />
-        <About />
-        <button onClick={this.handleHome}>home</button>
-        <button onClick={this.handleAbout}>about</button>
-      </div>
+      <BrowserRouter>
+        <div>
+          <Link to="/">Home</Link> |
+          <Link to="/about">About</Link>
+          <hr />
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+        </div>
+      </BrowserRouter>
     );
   }
 }
