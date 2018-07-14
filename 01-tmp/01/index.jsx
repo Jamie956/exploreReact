@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-//use class
+//class组件
 class Demo1 extends Component {
   render() {
     return (
@@ -12,7 +12,7 @@ class Demo1 extends Component {
   }
 }
 
-//as function
+//函数
 const Demo2 = () => {
   return (
     <div>
