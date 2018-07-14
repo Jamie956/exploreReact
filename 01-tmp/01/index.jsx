@@ -136,3 +136,26 @@ class Demo7 extends Component {
 
 //渲染组件到DOM
 ReactDOM.render(<Demo7 />, document.getElementById("root"));
+
+//组件生命周期
+class Layout extends Component {
+  constructor() {
+    super();
+  }
+  //初次渲染触发
+  componentWillMount() { }
+  //渲染时触发
+  componentDidMount() { }
+  //移除组件触发
+  componentWillUnmount() { }
+  //是否允许更新组件，返回flase拒绝更新
+  shouldComponentUpdate(nextState) { }
+  render() {
+    return (
+      <h1>hi</h1>
+    );
+  }
+}
+
+//移除组件
+ReactDOM.unmountComponentAtNode(document.getElementById('root'));
