@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-//class组件
+//class作为组件
 class Demo1 extends Component {
   render() {
     return (
@@ -12,7 +12,7 @@ class Demo1 extends Component {
   }
 }
 
-//函数
+//函数作为组件
 const Demo2 = () => {
   return (
     <div>
@@ -21,22 +21,20 @@ const Demo2 = () => {
   );
 };
 
-//as tag
+//引用组件
 const Foo = () => <h1>It is Foo</h1>;
-const Bar = () => <h1>It is Bar</h1>;
 
 class Demo3 extends Component {
   render() {
     return (
       <div>
         <Foo />
-        <Bar />
       </div>
     );
   }
 }
 
-//click event as function
+//点击事件
 const Demo4 = () => {
   const alertFun = () => {
     alert("ax");
@@ -44,17 +42,8 @@ const Demo4 = () => {
   return <button onClick={alertFun}>click me</button>;
 };
 
-//click event as class
-class Demo8 extends Component {
-  render() {
-    const alertFun = () => {
-      alert("mi");
-    };
-    return <button onClick={alertFun}>click me</button>;
-  }
-}
 
-//class definded a function
+//绑定函数
 class Demo9 extends Component {
   constructor() {
     super();
@@ -63,81 +52,45 @@ class Demo9 extends Component {
   alertFun() {
     alert("ki");
   }
-  render() {
-    return <button onClick={this.alertFun}>click me</button>;
-  }
 }
 
-//class init and get state
-class Demo10 extends Component {
-  constructor() {
-    super();
-    this.state = {
-      greeting: "hi"
-    };
-  }
-  render() {
-    return <h1>{this.state.greeting}</h1>;
-  }
-}
-
-//class init, set and get state
+//state初始化，设置，获取
 class Demo11 extends Component {
   constructor() {
     super();
+    //初始化state
     this.state = {
       greeting: ""
     };
-    this.handleClick = this.handleClick.bind(this);
   }
   handleClick() {
+    //设置state
     this.setState({
       greeting: "halo"
     });
   }
   render() {
+    //获取state
     return (
       <div>
         {this.state.greeting}
-        <button onClick={this.handleClick}>click</button>
       </div>
     );
   }
 }
 
-//function get props
-const UserForm = props => {
+//组件属性传递，获取
+const UserForm = ({ user }) => {
   return (
-    <div>
-      {props.user.name} | {props.user.email}
-    </div>
+    <div> {user.name} </div>
   );
 };
 const Demo5 = () => {
-  let user = {
-    name: "tom",
-    email: "tomemail"
-  };
+  let user = { name: "tom" };
   return <UserForm user={user} />;
 };
 
-//function get props 2
-const Form1 = ({ user }) => {
-  return (
-    <div>
-      {user.name} | {user.email}
-    </div>
-  );
-};
-const Demo12 = () => {
-  let user = {
-    name: "jo",
-    email: "joemail"
-  };
-  return <Form1 user={user} />;
-};
-
-//class get props
+//组件属性传递，获取
 class Form2 extends Component {
   constructor(props) {
     super(props);
@@ -154,63 +107,32 @@ const Demo13 = () => {
   return <Form2 name={name} />;
 };
 
-//function as props, set input data as state
-const Body = ({ title, name, handleChange, handleSubmit }) => {
-  return (
-    <div>
-      <input
-        name="title"
-        value={title}
-        onChange={e => {
-          handleChange(e);
-        }}
-      />
-      <br />
-      <input
-        name="name"
-        value={name}
-        onChange={e => {
-          handleChange(e);
-        }}
-      />
-      <br />
-      <button onClick={handleSubmit}>submit</button>
-    </div>
-  );
-};
-
+//input change事件，修改state
 class Demo7 extends Component {
   constructor() {
     super();
     this.state = {
-      title: "Here We Go!",
-      name: "tomcat"
+      title: "Here We Go!"
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
-  handleSubmit() {
-    alert("title: " + this.state.title);
-    alert("name: " + this.state.name);
-  }
-
   render() {
-    const { title, name } = this.state;
     return (
       <div>
-        <Body
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          title={title}
-          name={name}
+        <input
+          name="title"
+          value={this.state.title}
+          onChange={e => {
+            handleChange(e);
+          }}
         />
       </div>
     );
   }
 }
+
+//渲染组件到DOM
 ReactDOM.render(<Demo7 />, document.getElementById("root"));
