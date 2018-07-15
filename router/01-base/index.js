@@ -51,6 +51,10 @@ const App2 = () => (
 );
 
 //params
+const Child = ({ match }) => <div>id: {match.params.id}</div>;
+const ComponentWithRegex = ({ match }) => (
+  <div>order: {match.params.direction}</div>
+);
 const App3 = () => (
   <BrowserRouter>
     <div>
@@ -65,12 +69,6 @@ const App3 = () => (
       />
     </div>
   </BrowserRouter>
-);
-
-const Child = ({ match }) => <div>id: {match.params.id}</div>;
-
-const ComponentWithRegex = ({ match }) => (
-  <div>order: {match.params.direction}</div>
 );
 
 //withRouter
@@ -232,4 +230,4 @@ const App7 = () => (
   </BrowserRouter>
 );
 
-ReactDOM.render(<App7 />, document.getElementById("root"));
+ReactDOM.render(<App4 />, document.getElementById("root"));
