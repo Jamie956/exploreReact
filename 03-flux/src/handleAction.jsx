@@ -1,5 +1,3 @@
-// import { dispatcher } from "./flux.jsx";
-
 export const handleActions = action => {
   switch (action.type) {
     case "ADD": {
@@ -12,4 +10,3 @@ export const handleActions = action => {
     }
   }
 };
-// dispatcher.register(handleActions.bind(handleActions));
