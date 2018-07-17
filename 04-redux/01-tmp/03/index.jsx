@@ -1,11 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { createStore } from "redux";
 
-/**
- * reducers
- */
-const counterReducer = (state = 0, action) => {
+//储存对象counter
+const counter = (state = 0, action) => {
   switch (action.type) {
     case "INCREMENT":
       return state + 1;
@@ -16,19 +14,18 @@ const counterReducer = (state = 0, action) => {
   }
 };
 
-/**
- * store
- */
-const store = createStore(counterReducer);
+//关联储存对象
+const store = createStore(counter);
 
+//action,根据类型操作储存对象
 const incrementAction = () => {
   store.dispatch({ type: 'INCREMENT' });
 };
-
 const decrementtAction = () => {
   store.dispatch({ type: 'DECREMENT' });
 };
 
+//react渲染
 const render = () =>
   ReactDOM.render(
     <div>
@@ -40,4 +37,6 @@ const render = () =>
   );
 
 render();
+
+//监听dispatch,调用时触发
 store.subscribe(render);

@@ -1,5 +1,5 @@
+//todos储存对象
 const todos = (state = [], action) => {
-  console.log(action)
   switch (action.type) {
     case 'ADD_TODO':
       return [
