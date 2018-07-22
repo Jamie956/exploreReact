@@ -10,7 +10,15 @@ class App extends Component {
   render() {
     return (
       <div>
-        <div className={style.header}>header</div>
+        <div className={style.header}>
+          header
+          <a href="#">welcome</a>
+        </div>
+
+        <div className={style.main}>
+          <div className={style.menu}>menu</div>
+          <div className={style.content}>content</div>
+        </div>
       </div>
     );
   }
