@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import { RaisedButton, TextField } from "material-ui";
+import Button from "@material-ui/core/Button";
 
 class App extends Component {
   render() {
     return (
-      <MuiThemeProvider>
-        <div>
-          <RaisedButton label="Default" />
-          <TextField hintText="Hint Text" />
-        </div>
-      </MuiThemeProvider>
+      <Button variant="contained" color="secondary">
+        Super Secret Password
+      </Button>
     );
   }
 }
