@@ -1,5 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Main from "./components/Main2.jsx";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
-ReactDOM.render(<Main />, document.getElementById("root"));
+import Main from "./components/Main3.jsx";
+
+ReactDOM.render(
+  <MuiThemeProvider>
+    <Main />
+  </MuiThemeProvider>,
+  document.getElementById("root")
+);
