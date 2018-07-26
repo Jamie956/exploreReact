@@ -45,37 +45,35 @@ const App2 = () => (
   </BrowserRouter>
 );
 
-//params
-const Child = ({ match }) => <div>id: {match.params.id}</div>;
-const ComponentWithRegex = ({ match }) => (
-  <div>order: {match.params.direction}</div>
-);
+//路由参数匹配
+const Home = ({ match }) => {
+  console.log(match);
+  return <div />;
+};
+
 const App3 = () => (
   <BrowserRouter>
     <div>
-      <Link to="/itemid">getItem</Link> |
-      <Link to="/order/asc">asc</Link> |
-      <Link to="/order/desc">desc</Link>
+      <Link to="/123">Item</Link> |
+      <Link to="/item/asc">asc</Link> |
+      <Link to="/item/desc">desc</Link>
       <hr />
-      <Route path="/:id" component={Child} />
-      <Route
-        path="/order/:direction(asc|desc)"
-        component={ComponentWithRegex}
-      />
+      <Route exact path="/:id" component={Home} />
+      <Route exact path="/item/:dir(asc|desc)" component={Home} />
     </div>
   </BrowserRouter>
 );
 
 //withRouter
-const AuthButton = withRouter(({ history }) => (
-  <p>
-    <button onClick={() => history.push("/home")}>Sign out</button>
-  </p>
-));
+const About = withRouter(props => {
+  console.log(props);
+  const { history } = props;
+  return <button onClick={() => history.push("/about")}>about</button>;
+});
 
 const App4 = () => (
   <BrowserRouter>
-    <AuthButton />
+    <About />
   </BrowserRouter>
 );
 
@@ -225,4 +223,4 @@ const App7 = () => (
   </BrowserRouter>
 );
 
-ReactDOM.render(<App2 />, document.getElementById("root"));
+ReactDOM.render(<App4 />, document.getElementById("root"));
