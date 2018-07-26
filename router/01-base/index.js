@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import {
   BrowserRouter,
   Route,
   Link,
   withRouter,
-  Prompt,
   Switch,
   Redirect
 } from "react-router-dom";
