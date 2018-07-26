@@ -93,32 +93,33 @@ const App5 = () => (
   </BrowserRouter>
 );
 
-//not match
+//重定向
 const App8 = () => (
   <BrowserRouter>
     <div>
-      <Link to="/">Home1</Link> |
-      <Link to="/old-match">Old Match, to be redirected</Link> |
-      <Link to="/will-match">Will Match</Link> |
-      <Link to="/will-not-match">Will Not Match</Link> |
-      <Link to="/also/will/not/match">Also Will Not Match</Link>
+      <Link to="/re">redirected to about</Link>
       <hr />
       <Switch>
-        <Route path="/" exact component={Home1} />
-        <Redirect from="/old-match" to="/will-match" />
-        <Route path="/will-match" component={WillMatch} />
-        <Route component={NoMatch} />
+        <Redirect from="/re" to="/about" />
+        <Route path="/" exact component={() => <h1>home</h1>} />
+        <Route path="/about" component={() => <h1>about</h1>} />
       </Switch>
     </div>
   </BrowserRouter>
 );
 
-const Home1 = () => <h1>Home1</h1>;
-const WillMatch = () => <h1>WillMatch</h1>;
-const NoMatch = ({ location }) => (
-  <h3>
-    No match for <code>{location.pathname}</code>
-  </h3>
+//不匹配
+const App6 = () => (
+  <BrowserRouter>
+    <div>
+      <Link to="/xx">no match</Link>
+      <hr />
+      <Switch>
+        <Route path="/" exact component={() => <h1>home</h1>} />
+        <Route component={() => <h1>No match</h1>} />
+      </Switch>
+    </div>
+  </BrowserRouter>
 );
 
 //config
@@ -126,24 +127,24 @@ const routes1 = [
   {
     path: "/",
     exact: true,
-    main: () => <h2>Home</h2>
+    main: () => <h2>home</h2>
   },
   {
-    path: "/bubblegum",
-    main: () => <h2>Bubblegum</h2>
+    path: "/doc",
+    main: () => <h2>doc</h2>
   },
   {
-    path: "/shoelaces",
-    main: () => <h2>Shoelaces</h2>
+    path: "/about",
+    main: () => <h2>about</h2>
   }
 ];
 
 const App9 = () => (
   <BrowserRouter>
     <div>
-      <Link to="/">Home</Link> |
-      <Link to="/bubblegum">Bubblegum</Link> |
-      <Link to="/shoelaces">Shoelaces</Link>
+      <Link to="/">home</Link> |
+      <Link to="/doc">doc</Link> |
+      <Link to="/about">about</Link>
       <hr />
       {routes1.map((route, index) => (
         <Route
@@ -157,56 +158,53 @@ const App9 = () => (
   </BrowserRouter>
 );
 
-//config
-const Main = () => <h2>Main</h2>;
-const Sandwiches = () => <h2>Sandwiches</h2>;
-const Bus = () => <h3>Bus</h3>;
-const Cart = () => <h3>Cart</h3>;
-
-const Tacos = ({ routes }) => (
+//子路由
+const Parent = ({ routes }) => (
   <div>
-    <Link to="/tacos/bus">Bus</Link> |
-    <Link to="/tacos/cart">Cart</Link>
+    <Link to="/parent/child1">child1</Link> |
+    <Link to="/parent/child2">child2</Link>
     {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
   </div>
 );
 
+const GenetateRoutes = route => {
+  return (
+    <Route
+      path={route.path}
+      render={props => <route.component {...props} routes={route.routes} />}
+    />
+  );
+};
+
 const routes = [
   {
-    path: "/sandwiches",
-    component: Sandwiches
+    path: "/home",
+    component: () => <h2>home</h2>
   },
   {
-    path: "/tacos",
-    component: Tacos,
+    path: "/parent",
+    component: Parent,
     routes: [
       {
-        path: "/tacos/bus",
-        component: Bus
+        path: "/parent/child1",
+        component: () => <h3>child1</h3>
       },
       {
-        path: "/tacos/cart",
-        component: Cart
+        path: "/parent/child2",
+        component: () => <h3>child2</h3>
       }
     ]
   }
 ];
 
-const RouteWithSubRoutes = route => (
-  <Route
-    path={route.path}
-    render={props => <route.component {...props} routes={route.routes} />}
-  />
-);
-
 const App7 = () => (
   <BrowserRouter>
     <div>
-      <Link to="/tacos">Tacos</Link> |
-      <Link to="/sandwiches">Sandwiches</Link>
-      {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+      <Link to="/parent">parent</Link> |
+      <Link to="/home">home</Link>
+      {routes.map((route, i) => <GenetateRoutes key={i} {...route} />)}
     </div>
   </BrowserRouter>
 );
 
-ReactDOM.render(<App5 />, document.getElementById("root"));
+ReactDOM.render(<App7 />, document.getElementById("root"));
