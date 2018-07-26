@@ -3,7 +3,13 @@ import { withRouter } from "react-router-dom";
 
 class Home extends Component {
   render() {
-    return <div>is Home</div>;
+    console.log(this.props);
+    return (
+      <div>
+        is Home
+        <button onClick={() => this.props.history.push("/about")}>about</button>
+      </div>
+    );
   }
 }
 

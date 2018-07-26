@@ -63,12 +63,15 @@ const App3 = () => (
   </BrowserRouter>
 );
 
-//withRouter
+//子组件获取router信息
 const About = withRouter(props => {
   console.log(props);
-  const { history } = props;
-  return <button onClick={() => history.push("/about")}>about</button>;
+  return <button onClick={() => props.history.push("/about")}>about</button>;
 });
+// const About = props => {
+//   console.log(props)
+//   return <button onClick={() => props.history.push("/about")}>about</button>;
+// };
 
 const App4 = () => (
   <BrowserRouter>
@@ -206,4 +209,4 @@ const App7 = () => (
   </BrowserRouter>
 );
 
-ReactDOM.render(<App7 />, document.getElementById("root"));
+ReactDOM.render(<App4 />, document.getElementById("root"));
