@@ -10,40 +10,35 @@ import {
   Redirect
 } from "react-router-dom";
 
-const Home = () => <div>Home</div>;
-const About = () => <div>About</div>;
+//simple
 const App1 = () => (
   <BrowserRouter>
     <div>
       <Link to="/">Home</Link> |
       <Link to="/about">About</Link>
       <hr />
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
+      <Route exact path="/" component={() => <div>Home</div>} />
+      <Route path="/about" component={() => <div>About</div>} />
     </div>
   </BrowserRouter>
 );
 
-//match.url
-const Art = () => <div>Art</div>;
-const Health = () => <div>Health</div>;
-const Topics = ({ match }) => {
-  return (
-    <div>
-      <Link to={`${match.url}/art`}>Art</Link>
-      <Route path={`${match.url}/art`} component={Art} />
-      <Route
-        exact
-        path={match.url}
-        render={() => <h3>Please select a topic.</h3>}
-      />
-    </div>
-  );
+//路由渲染
+const App10 = () => (
+  <BrowserRouter>
+    <Route exact path="/" render={() => <h3>halo</h3>} />
+  </BrowserRouter>
+);
+
+//获取父路由信息
+const Topics = props => {
+  console.log(props);
+  return <div>halo</div>;
 };
 const App2 = () => (
   <BrowserRouter>
     <div>
-      <Link to="/topics">Topics</Link>
+      <Link to="/topics">topics</Link>
       <hr />
       <Route path="/topics" component={Topics} />
     </div>
@@ -230,4 +225,4 @@ const App7 = () => (
   </BrowserRouter>
 );
 
-ReactDOM.render(<App4 />, document.getElementById("root"));
+ReactDOM.render(<App2 />, document.getElementById("root"));
