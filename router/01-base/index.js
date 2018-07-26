@@ -77,35 +77,21 @@ const App4 = () => (
   </BrowserRouter>
 );
 
-//custom route
-const Protected = () => <h3>Protected</h3>;
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => <Component {...props} />} />
-);
+//自定义路由
+const MyRoute = props => {
+  console.log(props);
+  const { component: Component, ...rest } = props;
+  return <Route {...rest} render={props => <Component {...props} />} />;
+};
 
 const App5 = () => (
   <BrowserRouter>
     <div>
-      <Link to="/protected">Protected Page</Link>
-      <PrivateRoute path="/protected" component={Protected} />
+      <Link to="/home">home</Link>
+      <MyRoute path="/home" component={() => <h3>halo</h3>} />
     </div>
   </BrowserRouter>
 );
-
-//custom link
-const App6 = () => (
-  <BrowserRouter>
-    <div>
-      <MyLink to="/" label="Home" />
-      <MyLink to="/about" label="About" />
-      <hr />
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-    </div>
-  </BrowserRouter>
-);
-
-const MyLink = ({ label, to }) => <Link to={to}>{label}</Link>;
 
 //not match
 const App8 = () => (
@@ -223,4 +209,4 @@ const App7 = () => (
   </BrowserRouter>
 );
 
-ReactDOM.render(<App4 />, document.getElementById("root"));
+ReactDOM.render(<App5 />, document.getElementById("root"));
