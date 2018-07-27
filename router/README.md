@@ -20,6 +20,22 @@
 
 <StaticRouter> 用在服务端渲染,它的属性location的值是req.url
 
+===Navigation===
+<Link>
+  属性:
+  to
+  replace 刷新current entry
+  innerRef
+<NavLink>
+  属性:
+  activeClassName 与current location匹配时,提供定义好的class元素
+  activeStyle 与current location匹配时,提供定义好的class元素
+  exact 精确匹配时,class/style才生效
+  strict 严格模式,路径末尾需要待斜杠
+  isActive 参数是active时执行的函数
+<Redirect> 重定向
+
+
 ===Route===
 <Route> 的属性path 与location’s pathname比较,如果匹配就渲染
 <Route> 没有属性path,就总是匹配
@@ -30,14 +46,4 @@ component 它的值就是一个component
 render 它的值是一个函数
 children
 
-===Navigation===
-<Link>
-  to
-  replace 刷新current entry
-  innerRef
-
-
-  
-<NavLink> activeClassName属性,与current location匹配时,使用class
-<Redirect> 重定向
 ```
