@@ -2,7 +2,7 @@
 ===Routers===
 <BrowserRouter> 用在有响应请求server
 <HashRouter> 用在静态文件server
-
+<StaticRouter> 用在服务端渲染,它的属性location的值是req.url
 ===Route===
 <Route> 的属性path 与location’s pathname比较,如果匹配就渲染
 <Route> 没有属性path,就总是匹配
