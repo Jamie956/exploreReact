@@ -19,6 +19,10 @@
   children
 
 <StaticRouter> 用在服务端渲染,它的属性location的值是req.url
+  basename
+  location
+  context
+  children
 
 ===Navigation===
 <Link>
@@ -37,15 +41,16 @@
 
 ===Route===
 <Redirect> 重定向
+  属性:
   to 重定向到
   push 刷新history
-  from
+  from 如果不加from,总是匹配当前location
   exact
   strict
 
 <Route>
   属性:
-  path 与location’s pathname比较,如果匹配就渲染,没有属性path,就总是匹配
+  path 与location’s pathname比较,如果匹配就渲染,不加path,就总是匹配当前location
   exact 精确匹配
   component 新建component,传入路由props
   render 它的值是一个函数
@@ -53,6 +58,7 @@
   strict 严格模式,路径末尾需要待斜杠
   location
   sensitive 是否大小写敏感
+
 <Switch> 包含多个<Route> ,它会遍历所有的<Route>元素,渲染第一个匹配的<Route>
 
 
