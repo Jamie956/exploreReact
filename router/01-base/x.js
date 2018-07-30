@@ -9,75 +9,75 @@ import {
   Redirect
 } from "react-router-dom";
 
-//simple
-const App1 = () => (
-  <BrowserRouter>
-    <div>
-      <Link to="/">Home</Link> |
-      <Link to="/about">About</Link>
-      <hr />
-      <Route exact path="/" component={() => <div>Home</div>} />
-      <Route path="/about" component={() => <div>About</div>} />
-    </div>
-  </BrowserRouter>
-);
+// //simple
+// const App1 = () => (
+//   <BrowserRouter>
+//     <div>
+//       <Link to="/">Home</Link> |
+//       <Link to="/about">About</Link>
+//       <hr />
+//       <Route exact path="/" component={() => <div>Home</div>} />
+//       <Route path="/about" component={() => <div>About</div>} />
+//     </div>
+//   </BrowserRouter>
+// );
 
-//路由渲染
-const App10 = () => (
-  <BrowserRouter>
-    <Route exact path="/" render={() => <h3>halo</h3>} />
-  </BrowserRouter>
-);
+// //路由渲染
+// const App10 = () => (
+//   <BrowserRouter>
+//     <Route exact path="/" render={() => <h3>halo</h3>} />
+//   </BrowserRouter>
+// );
 
 //获取父路由信息
-const Topics = props => {
-  console.log(props);
-  return <div>halo</div>;
-};
-const App2 = () => (
-  <BrowserRouter>
-    <div>
-      <Link to="/topics">topics</Link>
-      <hr />
-      <Route path="/topics" component={Topics} />
-    </div>
-  </BrowserRouter>
-);
+// const Topics = props => {
+//   console.log(props);
+//   return <div>halo</div>;
+// };
+// const App2 = () => (
+//   <BrowserRouter>
+//     <div>
+//       <Link to="/topics">topics</Link>
+//       <hr />
+//       <Route path="/topics" component={Topics} />
+//     </div>
+//   </BrowserRouter>
+// );
 
-//路由参数匹配
-const Home = ({ match }) => {
-  console.log(match);
-  return <div />;
-};
-
-const App3 = () => (
-  <BrowserRouter>
-    <div>
-      <Link to="/123">Item</Link> |
-      <Link to="/item/asc">asc</Link> |
-      <Link to="/item/desc">desc</Link>
-      <hr />
-      <Route exact path="/:id" component={Home} />
-      <Route exact path="/item/:dir(asc|desc)" component={Home} />
-    </div>
-  </BrowserRouter>
-);
-
-//子组件获取router信息
-const About = withRouter(props => {
-  console.log(props);
-  return <button onClick={() => props.history.push("/about")}>about</button>;
-});
-// const About = props => {
-//   console.log(props)
-//   return <button onClick={() => props.history.push("/about")}>about</button>;
+// //路由参数匹配
+// const Home = ({ match }) => {
+//   console.log(match);
+//   return <div />;
 // };
 
-const App4 = () => (
-  <BrowserRouter>
-    <About />
-  </BrowserRouter>
-);
+// const App3 = () => (
+//   <BrowserRouter>
+//     <div>
+//       <Link to="/123">Item</Link> |
+//       <Link to="/item/asc">asc</Link> |
+//       <Link to="/item/desc">desc</Link>
+//       <hr />
+//       <Route exact path="/:id" component={Home} />
+//       <Route exact path="/item/:dir(asc|desc)" component={Home} />
+//     </div>
+//   </BrowserRouter>
+// );
+
+// //子组件获取router信息
+// const About = withRouter(props => {
+//   console.log(props);
+//   return <button onClick={() => props.history.push("/about")}>about</button>;
+// });
+// // const About = props => {
+// //   console.log(props)
+// //   return <button onClick={() => props.history.push("/about")}>about</button>;
+// // };
+
+// const App4 = () => (
+//   <BrowserRouter>
+//     <About />
+//   </BrowserRouter>
+// );
 
 //自定义路由
 const MyRoute = props => {
