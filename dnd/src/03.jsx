@@ -2,25 +2,14 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-// fake data generator
-const getItems = (count, offset = 0) =>
-  Array.from({ length: count }, (v, k) => k).map(k => ({
-    id: `item-${k + offset}`,
-    content: `item ${k + offset}`
-  }));
-
-// a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
-
   return result;
 };
 
-/**
- * Moves an item from one list to another list.
- */
+// (源数组，目标数组，起始位置，目标位置)
 const move = (source, destination, droppableSource, droppableDestination) => {
   const sourceClone = Array.from(source);
   const destClone = Array.from(destination);
@@ -38,15 +27,10 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 const grid = 8;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
-  // some basic styles to make the items look a bit nicer
   userSelect: "none",
   padding: grid * 2,
   margin: `0 0 ${grid}px 0`,
-
-  // change background colour if dragging
   background: isDragging ? "lightgreen" : "grey",
-
-  // styles we need to apply on draggables
   ...draggableStyle
 });
 
@@ -58,15 +42,36 @@ const getListStyle = isDraggingOver => ({
 
 class App extends Component {
   state = {
-    items: getItems(10),
-    selected: getItems(5, 10)
+    items: [
+      {
+        id: "a1",
+        content: "item 1"
+      },
+      {
+        id: "b2",
+        content: "item 2"
+      },
+      {
+        id: "c3",
+        content: "item 3"
+      }
+    ],
+    selected: [
+      {
+        id: "d4",
+        content: "item 4"
+      },
+      {
+        id: "e5",
+        content: "item 5"
+      },
+      {
+        id: "f6",
+        content: "item 6"
+      }
+    ]
   };
 
-  /**
-   * A semi-generic way to handle multiple lists. Matches
-   * the IDs of the droppable container to the names of the
-   * source arrays stored in the state.
-   */
   id2List = {
     droppable: "items",
     droppable2: "selected"
@@ -76,8 +81,6 @@ class App extends Component {
 
   onDragEnd = result => {
     const { source, destination } = result;
-
-    // dropped outside the list
     if (!destination) {
       return;
     }
@@ -111,8 +114,6 @@ class App extends Component {
     }
   };
 
-  // Normally you would want to split things out into separate components.
-  // But in this example everything is just done in one place for simplicity
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -175,5 +176,4 @@ class App extends Component {
   }
 }
 
-// Put the things into the DOM!
 ReactDOM.render(<App />, document.getElementById("root"));
