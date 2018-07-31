@@ -2,37 +2,25 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-// fake data generator
-// const getItems = count =>
-//   Array.from({ length: count }, (v, k) => k).map(k => ({
-//     id: `item-${k}`,
-//     content: `item ${k}`,
-//   }));
-
-// a little function to help us with reordering the result
+//数组元素置换位置, (数组,起始位置,目的位置)
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
-
   return result;
 };
 
 const grid = 8;
-
+//子drag的样式，(是否拖动子drag，父drag的样式)
 const getItemStyle = (isDragging, draggableStyle) => ({
-  // some basic styles to make the items look a bit nicer
   userSelect: "none",
   padding: grid * 2,
   margin: `0 0 ${grid}px 0`,
-
-  // change background colour if dragging
   background: isDragging ? "lightgreen" : "grey",
-
-  // styles we need to apply on draggables
   ...draggableStyle
 });
 
+//父drag样式, (是否拖动)
 const getListStyle = isDraggingOver => ({
   background: isDraggingOver ? "lightblue" : "lightgrey",
   padding: grid,
@@ -43,18 +31,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // items: getItems(10),
       items: [
         {
-          id: "1",
+          id: "a1",
           content: "item 1"
         },
         {
-          id: "2",
+          id: "b2",
           content: "item 2"
         },
         {
-          id: "3",
+          id: "c3",
           content: "item 3"
         }
       ]
@@ -63,8 +50,10 @@ class App extends Component {
   }
 
   onDragEnd(result) {
-    console.log(result)
-    // dropped outside the list
+    console.log("Event onDragEnd");
+    //result 是拖动信息,包括移动的item的id,起始和目的位置
+    console.log(result);
+
     if (!result.destination) {
       return;
     }
@@ -75,14 +64,14 @@ class App extends Component {
       result.destination.index
     );
 
+    //更新数组
     this.setState({
       items
     });
   }
 
-  // Normally you would want to split things out into separate components.
-  // But in this example everything is just done in one place for simplicity
   render() {
+    console.log("render");
     console.log(this.state.items);
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -118,5 +107,4 @@ class App extends Component {
   }
 }
 
-// Put the thing into the DOM!
 ReactDOM.render(<App />, document.getElementById("root"));
