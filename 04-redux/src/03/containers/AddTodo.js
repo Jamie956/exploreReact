@@ -10,7 +10,7 @@ const AddTodo = ({ dispatch }) => {
     if (!input.value.trim()) {
       return
     }
-    //由ction的addTodo获取定义好的格式,通过dispatch分发出去
+    //由action的addTodo获取定义好的格式,通过dispatch分发出去
     dispatch(addTodo(input.value))
     input.value = ''
   }
