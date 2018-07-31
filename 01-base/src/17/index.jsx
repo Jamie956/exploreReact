@@ -1,17 +1,16 @@
-import React, { Component } from 'react'
-import ReactDOM from "react-dom";
-import AddUser from './AddUser.jsx'
-import ListUser from './ListUser.jsx'
+import React, { Component } from "react";
+import AddUser from "./AddUser.jsx";
+import ListUser from "./ListUser.jsx";
 
-export class User extends Component {
-	render() {
-		return (
-			<div>
-				<AddUser />
-				<ListUser />
-			</div>
-		)
-	}
+export class App extends Component {
+  render() {
+    return (
+      <div>
+        <AddUser />
+        <ListUser />
+      </div>
+    );
+  }
 }
 
-ReactDOM.render(<User />, document.getElementById('root'));
+export default App;
