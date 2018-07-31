@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 
-export class App extends Component {
+class App extends Component {
   constructor() {
     super();
     this.handleloadhome = this.handleloadhome.bind(this);
@@ -32,4 +31,4 @@ export class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export default App;

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import Bundle from "./Bundle.jsx";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
@@ -31,4 +30,4 @@ export class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export default App;

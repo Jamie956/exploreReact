@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 
-export default class Bundle extends React.Component {
+export class Bundle extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,3 +33,5 @@ export default class Bundle extends React.Component {
     return this.state.mod ? this.props.children(this.state.mod) : null;
   }
 }
+
+export default Bundle;

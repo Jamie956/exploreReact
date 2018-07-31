@@ -1,13 +1,13 @@
-var path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./03/index.jsx",
+  entry: "./src/index.jsx",
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, "build"),
     filename: "bundle.js",
-    filename: '[name].[chunkhash:8].js',
-    chunkFilename: '[name].[chunkhash:8].chunk.js',
+    filename: "[name]-[chunkhash:8].js",
+    chunkFilename: "[name]-[chunkhash:8]-chunk.js"
   },
   module: {
     rules: [
@@ -15,9 +15,9 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['es2015', 'react', 'stage-0']
+            presets: ["es2015", "react", "stage-0"]
           }
         }
       }
@@ -25,9 +25,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './03/index.html',
-      filename: 'index.html'
+      template: "./src/index.html",
+      filename: "index.html"
     })
   ],
+  resolve: {
+    extensions: [".js", ".jsx", ".json"]
+  }
 };
-
