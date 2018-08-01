@@ -6,7 +6,7 @@ const ReactLoadablePlugin = require("react-loadable/webpack")
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 var clientConfig = {
-  entry: "./src/browser/index.js",
+  entry: "./src/client/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name]-[chunkhash:8].js",
