@@ -1,4 +1,2 @@
 node_modules
-public
-server.js
-*server.js
+dist

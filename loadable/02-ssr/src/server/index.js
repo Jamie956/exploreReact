@@ -5,7 +5,7 @@ import React from 'react'
 import Loadable from 'react-loadable';
 
 import { getBundles } from 'react-loadable/webpack'
-import stats from './../../public/react-loadable.json';
+import stats from './../../dist/react-loadable.json';
 
 const app = express()
 

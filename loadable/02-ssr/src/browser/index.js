@@ -1,8 +1,9 @@
-import React from 'react'
-import { hydrate } from 'react-dom'
-import App from '../shared/App'
-import Loadable from 'react-loadable';
+import React from "react";
+import ReactDOM, { hydrate } from "react-dom";
+import App from "../shared/App";
+import Loadable from "react-loadable";
 
 Loadable.preloadReady().then(() => {
-  ReactDOM.hydrate(<App/>, document.getElementById('app'));
+  hydrate(<App />, document.getElementById("app"));
+  // ReactDOM.render(<App />, document.getElementById("app"));
 });

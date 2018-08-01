@@ -2,18 +2,21 @@ var path = require('path')
 var webpack = require('webpack')
 var nodeExternals = require('webpack-node-externals')
 const ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 var browserConfig = {
   entry: './src/browser/index.js',
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js',
-    publicPath: '/'
+    path: path.resolve(__dirname, 'dist'),
+    // filename: 'bundle.js',
+    // publicPath: '/'
+    filename: "[name]-[chunkhash:8].js",
+    chunkFilename: "[name]-[chunkhash:8]-chunk.js"
   },
   module: {
     rules: [
       {
-        test: /\.js?$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -29,13 +32,17 @@ var browserConfig = {
       __isBrowser__: "true"
     }),
     new ReactLoadablePlugin({
-      filename: './public/react-loadable.json',
+      filename: './dist/react-loadable.json',
     }),
     new webpack.optimize.CommonsChunkPlugin({
 			name: 'manifest',
       filename: 'manifest.js',
       minChunks: Infinity
-		})
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      filename: "index.html"
+    })
   ]
 }
 
@@ -44,9 +51,10 @@ var serverConfig = {
   target: 'node',
   externals: [nodeExternals()],
   output: {
-    path: __dirname,
+    // path: __dirname,
+    path: path.resolve(__dirname, 'dist'),
     filename: 'server.js',
-    publicPath: '/'
+    // publicPath: '/'
   },
   module: {
     rules: [
@@ -74,3 +82,5 @@ var serverConfig = {
 }
 
 module.exports = [browserConfig, serverConfig]
+
+// module.exports = [browserConfig]
