@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const reorder = (list, startIndex, endIndex) => {
@@ -99,4 +98,4 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export default App;

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 //数组元素置换位置, (数组,起始位置,目的位置)
@@ -107,4 +106,4 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export default App;
