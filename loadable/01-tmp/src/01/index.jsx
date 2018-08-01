@@ -1,24 +1,23 @@
-import React from "react";
-import ReactDOM from "react-dom";
-
+import React, { Component } from "react";
 import Loadable from "react-loadable";
 import Loading from "./components/Loading";
 
 const Home = Loadable({
-  loader: () => import(/* webpackChunkName: 'Home' */ "./components/Home"),
+  loader: () => import(/* webpackChunkName: 'home' */ "./components/Home"),
   loading: Loading,
   delay: 300, // 0.3 seconds
   timeout: 10000 // 10 seconds
 });
 
 const About = Loadable({
-  loader: () => import(/* webpackChunkName: 'About' */ "./components/About"),
+  loader: () => import(/* webpackChunkName: 'about' */ "./components/About"),
   loading: Loading,
   delay: 300,
   timeout: 10000
 });
 
-class App extends React.Component {
+//组件分片,按需载入
+class App extends Component {
   render() {
     return (
       <div>
@@ -29,4 +28,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export default App;

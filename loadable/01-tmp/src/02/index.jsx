@@ -1,24 +1,24 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import Loadable from "react-loadable";
 import Loading from "./components/Loading";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 const Home = Loadable({
-  loader: () => import(/* webpackChunkName: 'Home' */ "./components/Home"),
+  loader: () => import(/* webpackChunkName: 'home' */ "./components/Home"),
   loading: Loading,
   delay: 300,
   timeout: 10000
 });
 
 const About = Loadable({
-  loader: () => import(/* webpackChunkName: 'About' */ "./components/About"),
+  loader: () => import(/* webpackChunkName: 'about' */ "./components/About"),
   loading: Loading,
   delay: 300,
   timeout: 10000
 });
 
-class App extends React.Component {
+//组件分片,按路由载入
+class App extends Component {
   render() {
     return (
       <BrowserRouter>
@@ -34,4 +34,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export default App;
