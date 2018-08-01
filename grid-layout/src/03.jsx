@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { Responsive, WidthProvider } from "react-grid-layout";
-const ResponsiveReactGridLayout = WidthProvider(Responsive);
-import "react-grid-layout/css/styles.css";
-import "react-resizable/css/styles.css";
-import "./style.css";
 
+const ResponsiveReactGridLayout = WidthProvider(Responsive);
+
+// showcase
 function generateLayout() {
   return _.map(_.range(0, 25), function(item, i) {
     var y = Math.ceil(Math.random() * 4) + 1;

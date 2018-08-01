@@ -1,5 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./03";
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
+import "./style.css";
+import App from "./04";
 
 ReactDOM.render(<App />, document.getElementById("root"));
