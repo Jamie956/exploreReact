@@ -1,7 +1,10 @@
 import express from "express";
-import { renderToString } from "react-dom/server";
 import App from "../shared/App";
+
 import React from "react";
+import { renderToString } from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
+
 import Loadable from "react-loadable";
 
 import { getBundles } from "react-loadable/webpack";
@@ -13,10 +16,13 @@ app.use(express.static("dist"));
 
 app.get("/*", (req, res) => {
   let modules = [];
-
+  const context = {}
+  
   let html = renderToString(
     <Loadable.Capture report={moduleName => modules.push(moduleName)}>
-      <App />
+      <StaticRouter location={req.url} context={context}>
+        <App />
+      </StaticRouter>
     </Loadable.Capture>
   );
 
