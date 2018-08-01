@@ -1,23 +1,19 @@
-import React, { Component } from 'react'
-import Loadable from 'react-loadable';
-import Loading from './Loading';
+import React, { Component } from "react";
+import Loadable from "react-loadable";
+import Loading from "./Loading";
 
 const Home = Loadable({
-  loader: () => import(/* webpackChunkName: 'home' */ './Home'),
+  loader: () => import(/* webpackChunkName: 'home' */ "./Home"),
   loading: Loading,
   delay: 300, // 0.3 seconds
-  timeout: 10000, // 10 seconds
-  modules: ['./Home'],
-  webpack: () => [require.resolveWeak('./Home')],
+  timeout: 10000 // 10 seconds
 });
 
 const About = Loadable({
-  loader: () => import(/* webpackChunkName: 'about' */ './About'),
+  loader: () => import(/* webpackChunkName: 'about' */ "./About"),
   loading: Loading,
   delay: 300, // 0.3 seconds
-  timeout: 10000, // 10 seconds
-  modules: ['./About'],
-  webpack: () => [require.resolveWeak('./About')],
+  timeout: 10000 // 10 seconds
 });
 
 class App extends Component {
@@ -25,11 +21,11 @@ class App extends Component {
     return (
       <div>
         Hello World
-        <Home/>
-        <About/>
+        <Home />
+        <About />
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
