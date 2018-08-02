@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
-  const languages = [
+  const links = [
     {
       name: "Home",
       param: "home"
@@ -15,7 +15,7 @@ export default function Navbar() {
 
   return (
     <ul>
-      {languages.map(({ name, param }) => (
+      {links.map(({ name, param }) => (
         <li key={param}>
           <NavLink
             activeStyle={{ fontWeight: "bold" }}
