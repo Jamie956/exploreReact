@@ -9,8 +9,10 @@ var clientConfig = {
   entry: "./src/client/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name]-[chunkhash:8].js",
-    chunkFilename: "[name]-[chunkhash:8]-chunk.js"
+    // filename: "[name]-[chunkhash:8].js",
+    // chunkFilename: "[name]-[chunkhash:8]-chunk.js"
+    filename: "[name].js",
+    chunkFilename: "[name].js"
   },
   module: {
     rules: [

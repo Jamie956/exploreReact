@@ -16,8 +16,8 @@ app.use(express.static("dist"));
 
 app.get("/*", (req, res) => {
   let modules = [];
-  const context = {}
-  
+  const context = {};
+
   let html = renderToString(
     <Loadable.Capture report={moduleName => modules.push(moduleName)}>
       <StaticRouter location={req.url} context={context}>
@@ -33,12 +33,14 @@ app.get("/*", (req, res) => {
   <html lang="en">
     <body>
       <div id="root">${html}</div>
+      <script src="./../../dist/manifest.js"></script>
+      <script>window.main();</script>
+      ${bundles
+        .map(bundle => {
+          return `<script src="${bundle.file}" defer></script>`;
+        })
+        .join("\n")}
     </body>
-    ${bundles
-      .map(bundle => {
-        return `<script src="${bundle.file}" defer></script>`;
-      })
-      .join("\n")}
   </html>
 `);
 });

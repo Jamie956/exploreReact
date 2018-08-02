@@ -17,32 +17,32 @@ const About = Loadable({
   timeout: 10000 // 10 seconds
 });
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        Hello World
-        <Home />
-        <About />
-      </div>
-    );
-  }
-}
-
 // class App extends Component {
 //   render() {
 //     return (
-//       <BrowserRouter>
-//         <div>
-//           <Link to="/">Home</Link> |
-//           <Link to="/about">About</Link>
-//           <hr />
-//           <Route exact path="/" component={Home} />
-//           <Route path="/about" component={About} />
-//         </div>
-//       </BrowserRouter>
+//       <div>
+//         Hello World
+//         <Home />
+//         <About />
+//       </div>
 //     );
 //   }
 // }
+
+class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Link to="/">Home</Link> |
+          <Link to="/about">About</Link>
+          <hr />
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+        </div>
+      </BrowserRouter>
+    );
+  }
+}
 
 export default App;
