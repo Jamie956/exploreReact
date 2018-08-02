@@ -3,19 +3,20 @@ import React, { Component } from "react";
 export default class About extends Component {
   constructor(props) {
     super(props);
-
-    let repos;
+    let data;
     if (__isClient__) {
-      repos = window.__INITIAL_DATA__;
-      delete window.__INITIAL_DATA__;
+      data = window.__INITIAL_DATA__;
+      // delete window.__INITIAL_DATA__;
+      console.log("Get data from client: ", data);
     } else {
-      repos = this.props.staticContext.data;
+      data = this.props.staticContext.data;
+      console.log("Get data from server: ", data);
     }
     this.state = {
-      repos
+      data: data
     };
   }
   render() {
-    return <div>About, {this.state.repos}</div>;
+    return <div>{this.state.data.name}, About</div>;
   }
 }
