@@ -1,18 +1,18 @@
-import Home from './Home'
-import Grid from './Grid'
-import { fetchPopularRepos } from './api'
+import Home from "./Home";
+import Grid from "./Grid";
+import { fetchPopularRepos } from "./api";
 
-const routes =  [
+const routes = [
   {
-    path: '/',
+    path: "/",
     exact: true,
-    component: Home,
+    component: Home
   },
   {
-    path: '/popular/:id',
+    path: "/popular/:id",
     component: Grid,
-    fetchInitialData: (path = '') => fetchPopularRepos(path.split('/').pop())
+    fetchInitialData: (path = "") => fetchPopularRepos(path.split("/").pop())
   }
-]
+];
 
-export default routes
+export default routes;

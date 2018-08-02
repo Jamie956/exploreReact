@@ -33,7 +33,6 @@ app.get("*", (req, res, next) => {
           <script src="/bundle.js" defer></script>
           <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
         </head>
-
         <body>
           <div id="app">${markup}</div>
         </body>
