@@ -1,13 +1,12 @@
-var path = require("path");
-var webpack = require("webpack");
-var nodeExternals = require("webpack-node-externals");
+const path = require("path");
+const webpack = require("webpack");
+const nodeExternals = require("webpack-node-externals");
 
 var client = {
   entry: "./src/client/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
-    // publicPath: "/"
   },
   module: {
     rules: [
@@ -40,7 +39,6 @@ var server = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "server.js"
-    // publicPath: "/"
   },
   module: {
     rules: [
