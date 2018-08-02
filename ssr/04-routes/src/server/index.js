@@ -1,34 +1,33 @@
-import express from "express"
-// import cors from "cors"
-import React from "react"
-import { renderToString } from "react-dom/server"
-import { StaticRouter, matchPath } from "react-router-dom"
-import serialize from "serialize-javascript"
-import App from '../shared/App'
-import routes from '../shared/routes'
+import express from "express";
+import React from "react";
+import { renderToString } from "react-dom/server";
+import { StaticRouter, matchPath } from "react-router-dom";
+import serialize from "serialize-javascript";
+import App from "../shared/App";
+import routes from "../shared/routes";
 
-const app = express()
+const app = express();
 
-// app.use(cors())
-app.use(express.static("public"))
+app.use(express.static("dist"));
 
 app.get("*", (req, res, next) => {
-  const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
+  const activeRoute = routes.find(route => matchPath(req.url, route)) || {};
 
   const promise = activeRoute.fetchInitialData
     ? activeRoute.fetchInitialData(req.path)
-    : Promise.resolve()
+    : Promise.resolve();
 
-  promise.then((data) => {
-    const context = { data }
+  promise
+    .then(data => {
+      const context = { data };
 
-    const markup = renderToString(
-      <StaticRouter location={req.url} context={context}>
-        <App />
-      </StaticRouter>
-    )
+      const markup = renderToString(
+        <StaticRouter location={req.url} context={context}>
+          <App />
+        </StaticRouter>
+      );
 
-    res.send(`
+      res.send(`
       <!DOCTYPE html>
       <html>
         <head>
@@ -41,17 +40,9 @@ app.get("*", (req, res, next) => {
           <div id="app">${markup}</div>
         </body>
       </html>
-    `)
-  }).catch(next)
-})
+    `);
+    })
+    .catch(next);
+});
 
-app.listen(3000, () => {
-  console.log(`Server is listening on port: 3000`)
-})
-
-/*
-  1) Just get shared App rendering to string on server then taking over on client.
-  2) Pass data to <App /> on server. Show diff. Add data to window then pick it up on the client too.
-  3) Instead of static data move to dynamic data (github gists)
-  4) add in routing.
-*/
+app.listen(3000, console.log("Listening on port: 3000"));

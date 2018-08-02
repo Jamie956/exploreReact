@@ -5,7 +5,7 @@ class Grid extends Component {
     super(props)
 
     let repos
-    if (__isBrowser__) {
+    if (__isClient__) {
       repos = window.__INITIAL_DATA__
       delete window.__INITIAL_DATA__
     } else {
