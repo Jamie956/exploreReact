@@ -1,61 +1,66 @@
-var path = require('path')
-var webpack = require('webpack')
-var nodeExternals = require('webpack-node-externals')
+const path = require("path");
+const webpack = require("webpack");
+const nodeExternals = require("webpack-node-externals");
 
-var browserConfig = {
-  entry: './src/browser/index.js',
+var client = {
+  entry: "./src/client/index.js",
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js',
-    publicPath: '/'
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js"
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['env', 'react'],
-          plugins: ['transform-object-rest-spread']
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["es2015", "react", "stage-0"],
+            plugins: ["transform-object-rest-spread"]
+          }
         }
       }
-    }]
+    ]
   },
   plugins: [
     new webpack.DefinePlugin({
-      __isBrowser__: "true"
+      __isClient__: "true"
     })
-  ]
-}
+  ],
+  resolve: {
+    extensions: [".js", ".jsx", ".json"]
+  }
+};
 
-var serverConfig = {
-  entry: './src/server/index.js',
-  target: 'node',
+var server = {
+  entry: "./src/server/index.js",
+  target: "node",
   externals: [nodeExternals()],
   output: {
-    path: __dirname,
-    filename: 'server.js',
-    publicPath: '/'
+    path: path.resolve(__dirname, "dist"),
+    filename: "server.js"
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['env', 'react'],
-          plugins: ['transform-object-rest-spread']
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["es2015", "react", "stage-0"],
+            plugins: ["transform-object-rest-spread"]
+          }
         }
       }
-    }]
+    ]
   },
   plugins: [
     new webpack.DefinePlugin({
-      __isBrowser__: "false"
+      __isClient__: "false"
     })
   ]
-}
+};
 
-module.exports = [browserConfig, serverConfig]
+module.exports = [client, server];
