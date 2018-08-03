@@ -9,10 +9,11 @@ import { getBundles } from "react-loadable/webpack";
 import stats from "./../../dist/react-loadable.json";
 
 import App from "../shared/App";
+import path from "path";
 
 const app = express();
 
-app.use(express.static("dist"));
+app.use(express.static(path.resolve("dist")));
 
 app.get("/*", (req, res) => {
   let modules = [];
@@ -25,24 +26,23 @@ app.get("/*", (req, res) => {
       </StaticRouter>
     </Loadable.Capture>
   );
-
+  console.log(html);
   let bundles = getBundles(stats, modules);
+  console.log(bundles);
 
   res.send(`
-  <!doctype html>
-  <html lang="en">
-    <body>
-      <div id="root">${html}</div>
-      <script src="./../../dist/manifest.js"></script>
-      <script>window.main();</script>
-      ${bundles
-        .map(bundle => {
-          return `<script src="${bundle.file}" defer></script>`;
-        })
-        .join("\n")}
-    </body>
-  </html>
-`);
+    <!doctype html>
+    <html lang="en">
+      <body>
+        <div id="root">${html}</div>
+        ${bundles
+          .map(bundle => {
+            return `<script src="${bundle.file}" defer></script>`;
+          })
+          .join("\n")}
+      </body>
+    </html>
+  `);
 });
 
 Loadable.preloadAll().then(() => {
