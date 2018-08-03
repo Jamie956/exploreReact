@@ -3,7 +3,6 @@ var webpack = require("webpack");
 var nodeExternals = require("webpack-node-externals");
 const ReactLoadablePlugin = require("react-loadable/webpack")
   .ReactLoadablePlugin;
-// const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 var clientConfig = {
   entry: "./src/client/index.js",
@@ -39,11 +38,7 @@ var clientConfig = {
       name: "manifest",
       filename: "manifest.js",
       minChunks: Infinity
-    }),
-    // new HtmlWebpackPlugin({
-    //   template: "./src/index.html",
-    //   filename: "index.html"
-    // })
+    })
   ]
 };
 

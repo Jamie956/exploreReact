@@ -1,14 +1,14 @@
 import express from "express";
-import App from "../shared/App";
 
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 
 import Loadable from "react-loadable";
-
 import { getBundles } from "react-loadable/webpack";
 import stats from "./../../dist/react-loadable.json";
+
+import App from "../shared/App";
 
 const app = express();
 
