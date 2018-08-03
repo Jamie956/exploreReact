@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Loadable from "react-loadable";
 import Loading from "./Loading";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 
 const Home = Loadable({
   loader: () => import(/* webpackChunkName: 'home' */ "./Home"),
@@ -21,18 +21,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Home />
-        <About />
-
-        <BrowserRouter>
-          <div>
-            <Link to="/">Home</Link> |
-            <Link to="/about">About</Link>
-            <hr />
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-          </div>
-        </BrowserRouter>
+        <Link to="/">Home</Link> |
+        <Link to="/about">About</Link>
+        <hr />
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
       </div>
     );
   }

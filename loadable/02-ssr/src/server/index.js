@@ -26,9 +26,7 @@ app.get("/*", (req, res) => {
       </StaticRouter>
     </Loadable.Capture>
   );
-  console.log(html);
   let bundles = getBundles(stats, modules);
-  console.log(bundles);
 
   res.send(`
     <!doctype html>
