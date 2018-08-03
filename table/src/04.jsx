@@ -1,20 +1,22 @@
-import React from "react";
-import { render } from "react-dom";
+import React, { Component } from "react";
 import ReactTable from "react-table";
-import "react-table/react-table.css";
 
-class App extends React.Component {
+//edit-cell
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [{
-        name: 'Diko',
-        age: 12
-      }, {
-        name: 'Juju',
-        age: 18
-      }]
-    }
+      data: [
+        {
+          name: "Diko",
+          age: 12
+        },
+        {
+          name: "Juju",
+          age: 18
+        }
+      ]
+    };
     this.renderEditable = this.renderEditable.bind(this);
   }
 
@@ -30,7 +32,7 @@ class App extends React.Component {
           this.setState({ data });
           // console.log(data[cellInfo.index])
 
-          this.handleSubmit(data[cellInfo.index])
+          this.handleSubmit(data[cellInfo.index]);
         }}
         dangerouslySetInnerHTML={{
           __html: this.state.data[cellInfo.index][cellInfo.column.id]
@@ -40,32 +42,28 @@ class App extends React.Component {
   }
 
   handleSubmit(row) {
-    console.log('call handleSubmit')
+    console.log("call handleSubmit");
 
     var submitObj = {
-      'name': row.name,
-      'age': row.age
-    }
+      name: row.name,
+      age: row.age
+    };
     var postBody = JSON.stringify(submitObj);
-    console.log(postBody)
-    fetch("/api/edit",
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: postBody
-      }
-    )
-    .then((res) => {
-      if (res.status > 200) {
-        return res.json().then(data => {
-
-        });
-      }
+    console.log(postBody);
+    fetch("/api/edit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: postBody
     })
-    .catch(function (error) {
-      console.log(error);
-    })
+      .then(res => {
+        if (res.status > 200) {
+          return res.json().then(data => {});
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 
   render() {
@@ -73,20 +71,21 @@ class App extends React.Component {
 
     const columns = [
       {
-        Header: 'Name',
-        accessor: 'name',
+        Header: "Name",
+        accessor: "name",
         Cell: this.renderEditable
-      }, {
-        Header: 'Age',
-        accessor: 'age',
+      },
+      {
+        Header: "Age",
+        accessor: "age",
         Cell: this.renderEditable
       }
-    ]
+    ];
 
     const divStyle = {
-      color: 'blue',
+      color: "blue",
       height: 42
-    }
+    };
 
     return (
       <div style={divStyle} className="container">
@@ -101,4 +100,4 @@ class App extends React.Component {
   }
 }
 
-render(<App />, document.getElementById("root"));
+export default App;
