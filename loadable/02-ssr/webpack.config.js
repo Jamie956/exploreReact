@@ -1,8 +1,7 @@
 var path = require("path");
 var webpack = require("webpack");
 var nodeExternals = require("webpack-node-externals");
-const ReactLoadablePlugin = require("react-loadable/webpack")
-  .ReactLoadablePlugin;
+const { ReactLoadablePlugin } = require("react-loadable/webpack");
 
 var clientConfig = {
   entry: "./02/client/index.js",
@@ -21,7 +20,7 @@ var clientConfig = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["es2015", "react", "stage-0"],
+            presets: ["es2015", "react", "stage-0"]
             // plugins: ["react-loadable/babel"]
           }
         }
