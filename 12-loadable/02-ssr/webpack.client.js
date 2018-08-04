@@ -1,9 +1,9 @@
 var path = require("path");
 var webpack = require("webpack");
-var nodeExternals = require("webpack-node-externals");
+// var nodeExternals = require("webpack-node-externals");
 const { ReactLoadablePlugin } = require("react-loadable/webpack");
 
-var clientConfig = {
+var client = {
   entry: "./05/client/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -41,33 +41,33 @@ var clientConfig = {
   ]
 };
 
-var serverConfig = {
-  entry: "./05/server/index.js",
-  target: "node",
-  externals: [nodeExternals()],
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "server.js"
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["es2015", "react", "stage-0"]
-          }
-        }
-      }
-    ]
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      __isClient__: "false"
-    })
-  ]
-};
+// var serverConfig = {
+//   entry: "./05/server/index.js",
+//   target: "node",
+//   externals: [nodeExternals()],
+//   output: {
+//     path: path.resolve(__dirname, "dist"),
+//     filename: "server.js"
+//   },
+//   module: {
+//     rules: [
+//       {
+//         test: /\.js?$/,
+//         exclude: /node_modules/,
+//         use: {
+//           loader: "babel-loader",
+//           options: {
+//             presets: ["es2015", "react", "stage-0"]
+//           }
+//         }
+//       }
+//     ]
+//   },
+//   plugins: [
+//     new webpack.DefinePlugin({
+//       __isClient__: "false"
+//     })
+//   ]
+// };
 
-module.exports = clientConfig;
+module.exports = client;
