@@ -5,8 +5,8 @@ module.exports = {
   entry: "./src/index.jsx",
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "[name]-[chunkhash:8].js",
-    chunkFilename: "[name]-[chunkhash:8]-chunk.js"
+    filename: "[name]-[chunkhash:4].js",
+    chunkFilename: "[name]-[chunkhash:4].js"
   },
   module: {
     rules: [
