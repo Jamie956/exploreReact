@@ -11,9 +11,10 @@ const app = express();
 
 app.use(express.static(path.resolve("dist")));
 app.get("/*", (req, res) => {
+  console.log("Receive request.");
   let modules = [];
   const context = {};
-  
+
   //加入路由
   let html = renderToString(
     <Loadable.Capture report={moduleName => modules.push(moduleName)}>

@@ -7,10 +7,9 @@ var clientConfig = {
   entry: "./05/client/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    // filename: "[name]-[chunkhash:4].js",
     filename: "[name].js",
-    chunkFilename: "[name]-[chunkhash:4].js"
-    // chunkFilename: "[name].js"
+    chunkFilename: "[name]-[chunkhash:4].js",
+    publicPath: "/dist/"
   },
   module: {
     rules: [
@@ -21,7 +20,7 @@ var clientConfig = {
           loader: "babel-loader",
           options: {
             presets: ["es2015", "react", "stage-0"]
-            // plugins: ["react-loadable/babel"]
+            // plugins: ["react-loadable/babel", "syntax-dynamic-import"]
           }
         }
       }
@@ -32,7 +31,7 @@ var clientConfig = {
       __isClient__: "true"
     }),
     new ReactLoadablePlugin({
-      filename: "./dist/react-loadable.json"
+      filename: path.resolve(__dirname, "dist", "react-loadable.json")
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "manifest",
