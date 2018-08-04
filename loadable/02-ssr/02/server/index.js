@@ -7,8 +7,6 @@ import Loadable from "react-loadable";
 const app = express();
 
 app.use("/dist", express.static(path.resolve("dist")));
-
-//获取加载的组件
 app.get("/", (req, res) => {
   let modules = [];
 
@@ -17,7 +15,7 @@ app.get("/", (req, res) => {
       <App />
     </Loadable.Capture>
   );
-
+  //获取加载的组件
   console.log(modules);
 
   res.send(html);

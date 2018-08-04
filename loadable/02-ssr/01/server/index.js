@@ -4,11 +4,10 @@ import { renderToString } from "react-dom/server";
 import App from "../shared/App";
 import path from "path";
 import Loadable from "react-loadable";
-
 const app = express();
 
+//简单服务端渲染
 app.use("/dist", express.static(path.resolve("dist")));
-
 app.get("/", (req, res) => {
   res.send(`
     <!doctype html>
