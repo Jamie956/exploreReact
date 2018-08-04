@@ -4,12 +4,12 @@ var nodeExternals = require("webpack-node-externals");
 const { ReactLoadablePlugin } = require("react-loadable/webpack");
 
 var clientConfig = {
-  entry: "./03/client/index.js",
+  entry: "./04/client/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name]-[chunkhash:4].js",
+    // filename: "[name]-[chunkhash:4].js",
+    filename: "[name].js",
     chunkFilename: "[name]-[chunkhash:4].js"
-    // filename: "[name].js",
     // chunkFilename: "[name].js"
   },
   module: {
@@ -36,14 +36,14 @@ var clientConfig = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "manifest",
-      // filename: "manifest.js",
+      filename: "manifest.js",
       minChunks: Infinity
     })
   ]
 };
 
 var serverConfig = {
-  entry: "./03/server/index.js",
+  entry: "./04/server/index.js",
   target: "node",
   externals: [nodeExternals()],
   output: {
@@ -71,4 +71,4 @@ var serverConfig = {
   ]
 };
 
-module.exports = [serverConfig, clientConfig];
+module.exports = [clientConfig, serverConfig];
