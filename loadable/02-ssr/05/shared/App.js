@@ -4,17 +4,21 @@ import Loading from "./Loading";
 import { Route, Link } from "react-router-dom";
 
 const Home = Loadable({
-  loader: () => import(/* webpackChunkName: 'home' */ "./Home"),
   loading: Loading,
+  loader: () => import(/* webpackChunkName: 'home' */ "./Home"),
+  modules: ["./Home"],
+  webpack: () => [require.resolveWeak("./Home")],
   delay: 300, // 0.3 seconds
   timeout: 10000 // 10 seconds
 });
 
 const About = Loadable({
-  loader: () => import(/* webpackChunkName: 'about' */ "./About"),
   loading: Loading,
-  delay: 300, // 0.3 seconds
-  timeout: 10000 // 10 seconds
+  loader: () => import(/* webpackChunkName: 'about' */ "./About"),
+  modules: ["./About"],
+  webpack: () => [require.resolveWeak("./About")],
+  delay: 300,
+  timeout: 10000
 });
 
 class App extends Component {

@@ -4,7 +4,7 @@ var nodeExternals = require("webpack-node-externals");
 const { ReactLoadablePlugin } = require("react-loadable/webpack");
 
 var clientConfig = {
-  entry: "./04/client/index.js",
+  entry: "./05/client/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     // filename: "[name]-[chunkhash:4].js",
@@ -43,7 +43,7 @@ var clientConfig = {
 };
 
 var serverConfig = {
-  entry: "./04/server/index.js",
+  entry: "./05/server/index.js",
   target: "node",
   externals: [nodeExternals()],
   output: {
