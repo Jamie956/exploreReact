@@ -26,13 +26,13 @@ app.get("/", (req, res) => {
       <head></head>
       <body>
         <div id="app">${html}</div>
-        <script src="/dist/manifest.js"></script>
+        <script type="javascript" src="/dist/manifest.js" defer></script>
         ${bundles
           .map(bundle => {
-            return `<script src="/dist/${bundle.file}"></script>`;
+            return `<script type="javascript" src="/dist/${bundle.file}" defer></script>`;
           })
           .join("\n")}
-        <script src="/dist/main.js"></script>
+        <script type="javascript" src="/dist/main.js" defer></script>
       </body>
     </html>
   `);
