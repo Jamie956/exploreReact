@@ -5,7 +5,7 @@ const ReactLoadablePlugin = require("react-loadable/webpack")
   .ReactLoadablePlugin;
 
 var clientConfig = {
-  entry: "./01/client/index.js",
+  entry: "./02/client/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     // filename: "[name]-[chunkhash:8].js",
@@ -44,7 +44,7 @@ var clientConfig = {
 };
 
 var serverConfig = {
-  entry: "./01/server/index.js",
+  entry: "./02/server/index.js",
   target: "node",
   externals: [nodeExternals()],
   output: {
