@@ -13,7 +13,6 @@ app.get("/", (req, res) => {
   res.send(`
     <!doctype html>
     <html lang="en">
-      <head>...</head>
       <body>
         <div id="app">${renderToString(<App />)}</div>
       </body>
