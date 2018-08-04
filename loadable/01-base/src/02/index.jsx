@@ -3,6 +3,7 @@ import Loadable from "react-loadable";
 import Loading from "./components/Loading";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
+//路由加载
 const Home = Loadable({
   loader: () => import(/* webpackChunkName: 'home' */ "./components/Home"),
   loading: Loading,
@@ -17,7 +18,6 @@ const About = Loadable({
   timeout: 10000
 });
 
-//组件分片,按路由载入
 class App extends Component {
   render() {
     return (

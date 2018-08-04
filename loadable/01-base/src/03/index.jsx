@@ -26,7 +26,7 @@ class App extends Component {
       <div>
         <div>
           <button onClick={this.onClick} onMouseOver={this.onMouseOver}>
-            Show Bar
+            Show
           </button>
           {this.state.showBar && <Home />}
         </div>
