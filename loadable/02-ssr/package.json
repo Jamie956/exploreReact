@@ -23,6 +23,9 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
+    "build-client": "webpack --config webpack.client.js",
+    "build-server": "webpack --config webpack.server.js",
+    "build": "npm run build-client && npm run build-server",
     "watch": "webpack -w",
     "server": "nodemon dist/server.js"
   },
