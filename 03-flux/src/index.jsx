@@ -13,13 +13,6 @@ class Layout extends Component {
         >
           add
         </button>
-        <button
-          onClick={() => {
-            action.update(Date.now());
-          }}
-        >
-          update
-        </button>
       </div>
     );
   }

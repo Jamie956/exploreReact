@@ -4,9 +4,5 @@ export const handleActions = action => {
       console.log("ADD: ", action.text);
       break;
     }
-    case "UPDATE": {
-      console.log("UPDATE: ", action.text);
-      break;
-    }
   }
 };
